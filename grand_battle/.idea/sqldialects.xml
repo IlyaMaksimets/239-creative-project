@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/classes/game_classes/Button.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/classes/game_classes/Character.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/classes/game_classes/Turret.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/database_functions/get_and_update_info.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/database_functions/get_info_queries.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/database_functions/update_queries.py" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Resources/CodeFragments/main.py" dialect="GenericSQL" />
+  </component>
+</project>

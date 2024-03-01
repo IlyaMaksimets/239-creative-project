@@ -1,0 +1,46 @@
+.formBox{
+    position: absolute;
+    width: 400px;
+    height: 450px;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: 20px;
+    border: 6px solid #232323;
+    border-radius: 20px;
+    outline-offset: -15px;
+    outline: #2FBDBD solid 10px;
+    box-shadow: 0 0 40px 8px black;
+}
+
+.textInput{
+    margin: 20px 100% 0 20px;
+    background: #131313;
+    border: 2px solid #2FBDBD;
+    border-radius: 4px;
+    color: #2FBDBD;
+    font-size: 24px;
+    font-family: "Comic Sans MS", serif;
+}
+
+
+.submit{
+    text-align: center;
+    width: 170px;
+    height: 64px;
+    margin: 20px 100% 0 20px;
+    background: #131313;
+    border: 2px solid #CC0000;
+    border-radius: 4px;
+    color: #CC0000;
+    font-size: 44px;
+    font-family: "Comic Sans MS", serif;
+    transition-duration: 0.2s;
+}
+
+.submit:hover{
+    width: 187px;
+    height: 70px;
+    font-size: 48px;
+    text-shadow: 0 0 20px #CC0000;
+    transition-duration: 0.2s;
+}
