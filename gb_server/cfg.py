@@ -1,0 +1,8 @@
+TOKEN_HALF_LENGTH = 10
+SEC_IN = {
+    "MINUTE": 60,
+    "HOUR": 3600,
+    "DAY": 86400,
+    "MONTH": 2592000,
+    "YEAR": 31104000
+}

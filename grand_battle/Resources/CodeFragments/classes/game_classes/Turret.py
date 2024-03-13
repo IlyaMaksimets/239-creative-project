@@ -1,6 +1,6 @@
 import pygame
 
-from Resources.CodeFragments.classes import TurretConfig
+from grand_battle.Resources.CodeFragments.classes import TurretConfig
 from .EnemyBullet import EnemyBullet
 
 Turret_config = TurretConfig()

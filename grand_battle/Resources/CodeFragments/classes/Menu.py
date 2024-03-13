@@ -1,9 +1,9 @@
 import pygame
 
-from Resources.CodeFragments.level_functions import level_launch, endless_mode
-from Resources.CodeFragments.menu_functions import keybinding, main_menu
-from Resources.CodeFragments.menu_functions import options_audio, options_keyboard, options_video
-from Resources.CodeFragments.menu_functions.other_menu.play import play
+from grand_battle.Resources.CodeFragments.level_functions import level_launch, endless_mode
+from grand_battle.Resources.CodeFragments.menu_functions import keybinding, main_menu
+from grand_battle.Resources.CodeFragments.menu_functions import options_audio, options_keyboard, options_video
+from grand_battle.Resources.CodeFragments.menu_functions.other_menu.play import play
 
 
 class Menu:

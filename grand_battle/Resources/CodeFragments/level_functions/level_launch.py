@@ -3,8 +3,10 @@ from random import randint as rd
 
 import pygame
 
-from Resources.CodeFragments.classes import Button, Turret, Portal, DropCrate, EnemyBullet, Character, LevelLaunchConfig
-from Resources.CodeFragments.other_functions import get_font, load_map, level_background
+from grand_battle.Resources.CodeFragments.classes import Button, Turret, Portal, DropCrate, EnemyBullet, Character, \
+    LevelLaunchConfig
+from grand_battle.Resources.CodeFragments.database_functions import update_level
+from grand_battle.Resources.CodeFragments.other_functions import get_font, load_map, level_background
 
 
 def clear_groups(GROUPS_config):
@@ -286,24 +288,34 @@ def after_round_actions(CAV_config, MUSIC_config, Level_launch_config, level_num
         MUSIC_config.victory_sound.play()
         MUSIC_config.victory_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
         index = 62 + Level_launch_config.c_d * 36 + (int(level_num) - 1) * 4
+
         if CAV_config.TURRETS_DESTROYED in range(12, 15):
             if CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1][0] == '3':
                 if int(CAV_config.data[index][:2]) * 3600 + int(
                         CAV_config.data[index + 1][:2]) * 60 + int(CAV_config.data[index + 2][:2]) > ticks / 1000:
                     write_time(CAV_config, seconds, minutes, hours, index)
+                    update_level({"time": f"{hours}:{minutes}:{seconds}", "level": level_num, "stars": 3,
+                                  "difficulty": Level_launch_config.c_d})
             else:
                 write_time(CAV_config, seconds, minutes, hours, index)
-
+                update_level({"time": f"{hours}:{minutes}:{seconds}", "level": level_num, "stars": 3,
+                              "difficulty": Level_launch_config.c_d})
             CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1] = '3\n'
+
         elif CAV_config.TURRETS_DESTROYED in range(8, 12) and \
                 CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1][0] != '3':
             if CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1][0] == '2':
                 if int(CAV_config.data[index][:2]) * 3600 + int(
                         CAV_config.data[index + 1][:2]) * 60 + int(CAV_config.data[index + 2][:2]) > ticks / 1000:
                     write_time(CAV_config, seconds, minutes, hours, index)
+                    update_level({"time": f"{hours}:{minutes}:{seconds}", "level": level_num, "stars": 2,
+                                  "difficulty": Level_launch_config.c_d})
             else:
                 write_time(CAV_config, seconds, minutes, hours, index)
+                update_level({"time": f"{hours}:{minutes}:{seconds}", "level": level_num, "stars": 2,
+                              "difficulty": Level_launch_config.c_d})
             CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1] = '2\n'
+
         elif CAV_config.TURRETS_DESTROYED in range(0, 8) and \
                 CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1][
                     0] != '2' and \
@@ -312,8 +324,12 @@ def after_round_actions(CAV_config, MUSIC_config, Level_launch_config, level_num
                 if int(CAV_config.data[index][:2]) * 3600 + int(
                         CAV_config.data[index + 1][:2]) * 60 + int(CAV_config.data[index + 2][:2]) > ticks / 1000:
                     write_time(CAV_config, seconds, minutes, hours, index)
+                    update_level({"time": f"{hours}:{minutes}:{seconds}", "level": level_num, "stars": 1,
+                                  "difficulty": Level_launch_config.c_d})
             else:
                 write_time(CAV_config, seconds, minutes, hours, index)
+                update_level({"time": f"{hours}:{minutes}:{seconds}", "level": level_num, "stars": 1,
+                              "difficulty": Level_launch_config.c_d})
             CAV_config.data[Level_launch_config.c_d * 10 + int(level_num) - 1] = '1\n'
     else:
         MUSIC_config.game_over_sound.play()

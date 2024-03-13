@@ -2,9 +2,9 @@ import sys
 
 import pygame
 
-from Resources.CodeFragments.classes import Button
-from Resources.CodeFragments.menu_functions.other_menu.difficulty_list import difficulty_list
-from Resources.CodeFragments.database_functions import get_db_info_WOquery5
+from grand_battle.Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.menu_functions.other_menu.difficulty_list import difficulty_list
+from grand_battle.Resources.CodeFragments.database_functions import get_data
 
 
 def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
@@ -71,7 +71,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level01_button = Button(image=pygame.image.load(level01_button_path), image_path=level01_button_path,
                                 pos=level01_button_pos, level_button=1)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level01_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level01_button.update(SCREEN)
@@ -84,7 +84,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level02_button = Button(image=pygame.image.load(level02_button_path), image_path=level02_button_path,
                                 pos=level02_button_pos, level_button=2)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level02_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level02_button.update(SCREEN)
@@ -97,7 +97,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level03_button = Button(image=pygame.image.load(level03_button_path), image_path=level03_button_path,
                                 pos=level03_button_pos, level_button=3)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level03_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level03_button.update(SCREEN)
@@ -110,7 +110,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level04_button = Button(image=pygame.image.load(level04_button_path), image_path=level04_button_path,
                                 pos=level04_button_pos, level_button=4)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level04_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level04_button.update(SCREEN)
@@ -123,7 +123,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level05_button = Button(image=pygame.image.load(level05_button_path), image_path=level05_button_path,
                                 pos=level05_button_pos, level_button=5)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level05_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level05_button.update(SCREEN)
@@ -136,7 +136,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level06_button = Button(image=pygame.image.load(level06_button_path), image_path=level06_button_path,
                                 pos=level06_button_pos, level_button=6)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level06_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level06_button.update(SCREEN)
@@ -149,7 +149,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level07_button = Button(image=pygame.image.load(level07_button_path), image_path=level07_button_path,
                                 pos=level07_button_pos, level_button=7)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level07_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level07_button.update(SCREEN)
@@ -162,7 +162,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level08_button = Button(image=pygame.image.load(level08_button_path), image_path=level08_button_path,
                                 pos=level08_button_pos, level_button=8)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         level08_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level08_button.update(SCREEN)
@@ -178,7 +178,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level09_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level09_button.update(SCREEN)
         if not info_updated:
-            CAV_config.data = get_db_info_WOquery5()
+            CAV_config.data = get_data()
 
         endless_button_path = "../Textures/endless_mode_button_disabled.png"
         endless_button = Button(image=pygame.image.load(endless_button_path), image_path=endless_button_path,

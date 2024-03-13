@@ -1,6 +1,6 @@
 import pygame
 
-from Resources.CodeFragments.other_functions import get_font
+from grand_battle.Resources.CodeFragments.other_functions import get_font
 
 
 def get_beginner_difficulty_description_parts(Button_config):

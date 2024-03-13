@@ -2,15 +2,15 @@ import sys
 
 import pygame
 
-from Resources.CodeFragments.database_functions import get_db_info, update_db
-from Resources.CodeFragments.database_functions import keyconverting
-from Resources.CodeFragments.classes import Button
-from Resources.CodeFragments.other_functions import get_font
+from grand_battle.Resources.CodeFragments.database_functions import keyconverting
+from grand_battle.Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.other_functions import get_font
+from grand_battle.Resources.CodeFragments.database_functions import get_data_and_keys
 
 
 def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
     if CAV_config.first_launch:
-        CAV_config.data, CAV_config.keybinds = get_db_info(CAV_config.keybinds)
+        CAV_config.data, CAV_config.keybinds = get_data_and_keys({})
         CAV_config.keyactions = keyconverting(CAV_config.keybinds, CAV_config.keyactions)
 
         for i in range(40, 50):
@@ -68,7 +68,6 @@ def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
                 if quit_button.checkForInput(menu_mouse_pos):
                     MUSIC_config.button_click_sound.play()
                     MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
-                    CAV_config.data = update_db(CAV_config.data)
                     pygame.quit()
                     sys.exit()
         pygame.display.update()

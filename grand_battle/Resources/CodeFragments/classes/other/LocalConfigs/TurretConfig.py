@@ -1,5 +1,5 @@
 import pygame
-from Resources.CodeFragments.database_functions import get_song_and_sounds_volume
+from grand_battle.Resources.CodeFragments.database_functions import get_settings
 
 
 class TurretConfig:
@@ -9,4 +9,5 @@ class TurretConfig:
         self.SCREEN = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         self.CHARACTER_SPEED = 5
         self.TURRETS_DESTROYED = 0
-        self.SONG_VOLUME, self.SOUNDS_VOLUME = get_song_and_sounds_volume()
+        res = get_settings({})
+        self.SONG_VOLUME, self.SOUNDS_VOLUME = res["song_volume"], res["sounds_volume"]

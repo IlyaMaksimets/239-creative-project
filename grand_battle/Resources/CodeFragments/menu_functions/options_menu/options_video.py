@@ -2,8 +2,8 @@ import sys
 
 import pygame
 
-from Resources.CodeFragments.classes import Button
-from Resources.CodeFragments.other_functions import get_font
+from grand_battle.Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.other_functions import get_font
 
 
 def options_video(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):

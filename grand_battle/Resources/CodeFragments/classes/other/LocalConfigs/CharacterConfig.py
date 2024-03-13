@@ -1,5 +1,4 @@
 import pygame
-from Resources.CodeFragments.database_functions import get_song_and_sounds_volume
 
 
 class CharacterConfig:

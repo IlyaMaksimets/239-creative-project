@@ -3,8 +3,10 @@ from random import randint as rd
 
 import pygame
 
-from Resources.CodeFragments.classes import Button, Turret, Portal, DropCrate, EnemyBullet, Character, EndlessModeConfig
-from Resources.CodeFragments.other_functions import get_font, level_background, endless_map_update
+from grand_battle.Resources.CodeFragments.classes import Button, Turret, Portal, DropCrate, EnemyBullet, Character, \
+    EndlessModeConfig
+from grand_battle.Resources.CodeFragments.database_functions import update_level
+from grand_battle.Resources.CodeFragments.other_functions import get_font, level_background, endless_map_update
 
 
 def add_turrets(GROUPS_config, MAPS_config, CAV_config):
@@ -267,10 +269,8 @@ def after_round_actions(CAV_config, MUSIC_config):
     MUSIC_config.game_over_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
     CAV_config.data[len(CAV_config.data) - 1] = str(
         max(int(CAV_config.data[len(CAV_config.data) - 1]), (CAV_config.GLOBAL_X + 500) // 50))
-    info_copy = open('../Other/endless_record.txt', 'w')
-    info_copy.seek(0)
-    info_copy.write(CAV_config.data[len(CAV_config.data) - 1])
-    info_copy.close()
+    update_level(
+        {"time": f"00:00:00", "level": 0, "stars": CAV_config.data[len(CAV_config.data) - 1], "difficulty": 4})
 
 
 def endless_mode(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):

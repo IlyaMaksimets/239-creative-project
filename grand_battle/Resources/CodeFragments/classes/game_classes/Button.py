@@ -1,12 +1,12 @@
 import pygame
 
-from Resources.CodeFragments.classes import IconConfig, ButtonConfig
-from Resources.CodeFragments.database_functions import get_db_info_WOquery5
-from Resources.CodeFragments.other_functions import get_font, get_difficulty_description_parts
+from grand_battle.Resources.CodeFragments.classes import IconConfig, ButtonConfig
+from grand_battle.Resources.CodeFragments.other_functions import get_font, get_difficulty_description_parts
+from grand_battle.Resources.CodeFragments.database_functions import get_data
 
 Button_config = ButtonConfig()
 
-data = get_db_info_WOquery5()
+data = get_data({})
 
 
 def get_c_d(CHOSEN_DIFFICULTY):

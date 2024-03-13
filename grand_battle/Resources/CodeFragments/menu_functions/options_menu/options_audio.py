@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.classes import Button
 
 
 def options_audio(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):

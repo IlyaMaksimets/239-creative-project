@@ -1,7 +1,7 @@
 import pygame
 
 from .Bullet import Bullet
-from Resources.CodeFragments.classes.other import CharacterConfig
+from grand_battle.Resources.CodeFragments.classes.other import CharacterConfig
 
 Character_config = CharacterConfig()
 
