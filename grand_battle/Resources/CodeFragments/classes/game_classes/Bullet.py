@@ -11,9 +11,9 @@ class Bullet(pygame.sprite.Sprite):
             speed *= 2
         self.speed = speed
         self.direction = direction
-        image_path = "../Textures/player_bullet.png"
+        image_path = "Textures/player_bullet.png"
         if self.buff_type == 3:
-            image_path = "../Textures/player_bullet_200p.png"
+            image_path = "Textures/player_bullet_200p.png"
         if self.direction == -1:
             image_path = image_path[:-4] + "_rotated.png"
         self.image = pygame.image.load(image_path)

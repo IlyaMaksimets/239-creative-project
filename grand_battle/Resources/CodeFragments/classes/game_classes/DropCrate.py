@@ -8,13 +8,13 @@ CHARACTER_SPEED = 5
 class DropCrate(pygame.sprite.Sprite):
     def __init__(self, x, y, drop_type, screen_scroll, direction, MAP_MATRIX):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('../Textures/drop_crate_empty.png')
+        self.image = pygame.image.load('Textures/drop_crate_empty.png')
         if drop_type == 1:
-            self.image = pygame.image.load('../Textures/drop_crate_acceleration.png')
+            self.image = pygame.image.load('Textures/drop_crate_acceleration.png')
         elif drop_type == 2:
-            self.image = pygame.image.load('../Textures/drop_crate_damage.png')
+            self.image = pygame.image.load('Textures/drop_crate_damage.png')
         else:
-            self.image = pygame.image.load('../Textures/drop_crate_size.png')
+            self.image = pygame.image.load('Textures/drop_crate_size.png')
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.drop_type = drop_type

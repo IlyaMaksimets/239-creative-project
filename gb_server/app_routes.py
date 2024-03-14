@@ -90,9 +90,15 @@ def add_completion_query():
 
 @simple_page.route('/get_completions', methods=['POST'])
 def get_completions_query():
-    return get_completions({"login": request.json["username"]})
+    if len(request.json["token"]) < 2 * TOKEN_HALF_LENGTH:
+        return {}
+    else:
+        return get_completions({"token": request.json["token"]})
 
 
 @simple_page.route('/get_settings', methods=['POST'])
 def get_settings_query():
-    return get_settings({"login": request.json["username"]})
+    if len(request.json["token"]) < 2 * TOKEN_HALF_LENGTH:
+        return {}
+    else:
+        return get_settings({"token": request.json["token"]})

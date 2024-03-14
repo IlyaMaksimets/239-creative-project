@@ -6,7 +6,9 @@ from grand_battle.Resources.CodeFragments.database_functions import get_data
 
 Button_config = ButtonConfig()
 
-data = get_data({})
+token = open("token.txt", 'r').readlines()[0]
+if len(token) < 20:
+    data = get_data({})
 
 
 def get_c_d(CHOSEN_DIFFICULTY):
@@ -105,7 +107,7 @@ class Button:
 
                 blit_level_icons(level_icons)
 
-                difficulty_description = pygame.image.load("../Textures/difficulty_description_label.png")
+                difficulty_description = pygame.image.load("Textures/difficulty_description_label.png")
                 Button_config.SCREEN.blit(difficulty_description, (400, 500))
                 get_difficulty_description_parts(self.difficulty_button, Button_config)
             else:

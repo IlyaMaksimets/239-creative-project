@@ -26,7 +26,7 @@ def get_beginner_difficulty_description_parts(Button_config):
                         "Beginner difficulty (I'm Too Young to Die):", True, "#605b00"))
     description_rect_parts.append(description_text_parts[3].get_rect(center=(655, 620)))
     Button_config.SCREEN.blit(description_text_parts[3], description_rect_parts[3])
-    beginner_difficulty = pygame.image.load("../Textures/beginner_difficulty_icon.png")
+    beginner_difficulty = pygame.image.load("Textures/beginner_difficulty_icon.png")
     Button_config.SCREEN.blit(beginner_difficulty, (420, 550))
 
 
@@ -58,7 +58,7 @@ def get_medium_difficulty_description_parts(Button_config):
     description_rect_parts.append(description_text_parts[4].get_rect(center=(665, 655)))
     Button_config.SCREEN.blit(description_text_parts[4], description_rect_parts[4])
 
-    medium_difficulty = pygame.image.load("../Textures/medium_difficulty_icon.png")
+    medium_difficulty = pygame.image.load("Textures/medium_difficulty_icon.png")
     Button_config.SCREEN.blit(medium_difficulty, (420, 550))
 
 
@@ -89,7 +89,7 @@ def get_hard_difficulty_description_parts(Button_config):
                         "turrets and bullets speed", True, "#605b00"))
     description_rect_parts.append(description_text_parts[4].get_rect(center=(665, 655)))
     Button_config.SCREEN.blit(description_text_parts[4], description_rect_parts[4])
-    hard_difficulty = pygame.image.load("../Textures/hard_difficulty_icon.png")
+    hard_difficulty = pygame.image.load("Textures/hard_difficulty_icon.png")
     Button_config.SCREEN.blit(hard_difficulty, (420, 550))
 
 
@@ -125,7 +125,7 @@ def get_insane_difficulty_description_parts(Button_config):
                         "   - No hope...", True, "#605b00"))
     description_rect_parts.append(description_text_parts[5].get_rect(center=(585, 670)))
     Button_config.SCREEN.blit(description_text_parts[5], description_rect_parts[5])
-    insane_difficulty = pygame.image.load("../Textures/insane_difficulty_icon.png")
+    insane_difficulty = pygame.image.load("Textures/insane_difficulty_icon.png")
     Button_config.SCREEN.blit(insane_difficulty, (420, 550))
 
 

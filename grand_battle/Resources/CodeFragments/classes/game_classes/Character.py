@@ -21,8 +21,8 @@ class Character(pygame.sprite.Sprite):
 
     def __init__(self, x, y, velocity, lives, MAP_MATRIX, screen_scroll1):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('../Textures/character.png')
-        self.flying_gun = pygame.image.load('../Textures/flying_gun.png')
+        self.image = pygame.image.load('Textures/character.png')
+        self.flying_gun = pygame.image.load('Textures/flying_gun.png')
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.lives = lives

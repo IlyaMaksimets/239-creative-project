@@ -22,7 +22,7 @@ class GlobalMapsConfig:
         MAP_SEGMENTS = []
         for i in range(12):
             num = '0' * int(i < 9) + str(i + 1)
-            map_segment = open('../Other/endless-map-segments/endless_map_segment' + num + '.txt')
+            map_segment = open('Other/endless-map-segments/endless_map_segment' + num + '.txt')
             MAP_SEGMENTS_loaded.append(map_segment.readlines())
             map_segment.close()
 

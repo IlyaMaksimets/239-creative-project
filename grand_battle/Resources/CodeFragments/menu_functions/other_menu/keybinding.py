@@ -1,7 +1,7 @@
 import pygame
 
 from grand_battle.Resources.CodeFragments.classes import Button
-from grand_battle.Resources.CodeFragments.database_functions import update_key_in_db
+from grand_battle.Resources.CodeFragments.database_functions import update_settings
 from grand_battle.Resources.CodeFragments.other_functions import get_font
 
 
@@ -13,8 +13,8 @@ def keybinding(action, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, 
 
         SCREEN.fill("#121212")
 
-        return_to_options_O = Button(image=pygame.image.load("../Textures/return_button_disabled.png"),
-                                     image_path="../Textures/return_button_disabled.png", pos=(310, 900))
+        return_to_options_O = Button(image=pygame.image.load("Textures/return_button_disabled.png"),
+                                     image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_options_O.changeCondition(options_mouse_pos)
         return_to_options_O.update(SCREEN)
@@ -234,5 +234,5 @@ def keybinding(action, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, 
 
         pygame.display.update()
 
-    update_key_in_db(CAV_config.keybinds, action)
+    update_settings(CAV_config.keybinds)
     return SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config

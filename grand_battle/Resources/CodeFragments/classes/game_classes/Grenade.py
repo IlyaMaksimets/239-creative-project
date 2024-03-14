@@ -8,7 +8,7 @@ CHARACTER_SPEED = 5
 class Grenade(pygame.sprite.Sprite):
     def __init__(self, x, y, screen_scroll, direction, MAP_MATRIX):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('../Textures/grenade.png')
+        self.image = pygame.image.load('Textures/grenade.png')
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.velocity_x = 20

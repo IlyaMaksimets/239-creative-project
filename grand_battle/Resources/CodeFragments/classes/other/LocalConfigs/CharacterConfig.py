@@ -1,4 +1,5 @@
 import pygame
+from grand_battle.Resources.CodeFragments.database_functions import get_settings
 
 
 class CharacterConfig:
@@ -10,9 +11,12 @@ class CharacterConfig:
         self.G = 0.5
         self.GLOBAL_X = -500
         self.CHARACTER_SPEED = 5
-        self.l_1 = pygame.image.load('../Textures/1_lives.png')
-        self.l_2 = pygame.image.load('../Textures/2_lives.png')
-        self.l_3 = pygame.image.load('../Textures/3_lives.png')
-        self.l_4 = pygame.image.load('../Textures/4_lives.png')
+        self.l_1 = pygame.image.load('Textures/1_lives.png')
+        self.l_2 = pygame.image.load('Textures/2_lives.png')
+        self.l_3 = pygame.image.load('Textures/3_lives.png')
+        self.l_4 = pygame.image.load('Textures/4_lives.png')
         self.CHOSEN_DIFFICULTY = 'beginner'
-        self.SONG_VOLUME, self. SOUNDS_VOLUME = get_song_and_sounds_volume()
+        res = get_settings({})
+        self.SONG_VOLUME, self. SOUNDS_VOLUME = 0, 0
+        if res is not None:
+            self.SONG_VOLUME, self.SOUNDS_VOLUME = res["song_volume"], res["sounds_volume"]

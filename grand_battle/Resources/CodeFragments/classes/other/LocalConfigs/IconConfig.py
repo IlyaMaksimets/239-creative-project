@@ -8,7 +8,7 @@ class IconConfig:
 
     def initialize_icon_paths(self, stars_arr):
         for i in range(6):
-            current_icon_path = f"../Textures/Level buttons/level0{i + 1}_button_stars-{stars_arr[i][0]}_disabled.png"
+            current_icon_path = f"Textures/Level buttons/level0{i + 1}_button_stars-{stars_arr[i][0]}_disabled.png"
             self.icon_paths.append(current_icon_path)
 
     def initialize_icon_images(self):

@@ -27,43 +27,43 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(1680, 0, 240, 1080))
 
         CAV_config.levels_page_forward_button = Button(
-            image=pygame.image.load("../Textures/forward_list_button_disabled.png"),
-            image_path="../Textures/forward_list_button_disabled.png", pos=CAV_config.OOB)
+            image=pygame.image.load("Textures/forward_list_button_disabled.png"),
+            image_path="Textures/forward_list_button_disabled.png", pos=CAV_config.OOB)
 
         CAV_config.levels_page_forward_button.changeCondition(play_mouse_pos)
         CAV_config.levels_page_forward_button.update(SCREEN)
 
         CAV_config.levels_page_back_button = Button(
-            image=pygame.image.load("../Textures/back_list_button_disabled.png"),
-            image_path="../Textures/back_list_button_disabled.png", pos=CAV_config.OOB)
+            image=pygame.image.load("Textures/back_list_button_disabled.png"),
+            image_path="Textures/back_list_button_disabled.png", pos=CAV_config.OOB)
 
         CAV_config.levels_page_back_button.changeCondition(play_mouse_pos)
         CAV_config.levels_page_back_button.update(SCREEN)
 
         if CAV_config.levels_page == 1:
             CAV_config.levels_page_forward_button = Button(
-                image=pygame.image.load("../Textures/forward_list_button_disabled.png"),
-                image_path="../Textures/forward_list_button_disabled.png", pos=(1400, 500))
+                image=pygame.image.load("Textures/forward_list_button_disabled.png"),
+                image_path="Textures/forward_list_button_disabled.png", pos=(1400, 500))
 
             CAV_config.levels_page_forward_button.changeCondition(play_mouse_pos)
             CAV_config.levels_page_forward_button.update(SCREEN)
 
         else:
             CAV_config.levels_page_back_button = Button(
-                image=pygame.image.load("../Textures/back_list_button_disabled.png"),
-                image_path="../Textures/back_list_button_disabled.png", pos=(1320, 500))
+                image=pygame.image.load("Textures/back_list_button_disabled.png"),
+                image_path="Textures/back_list_button_disabled.png", pos=(1320, 500))
 
             CAV_config.levels_page_back_button.changeCondition(play_mouse_pos)
             CAV_config.levels_page_back_button.update(SCREEN)
 
         choose_difficulty = Button(
-            image=pygame.image.load("../Textures/Difficulty buttons/difficulty_button_disabled.png"),
-            image_path="../Textures/Difficulty buttons/difficulty_button_disabled.png", pos=(1500, 200))
+            image=pygame.image.load("Textures/Difficulty buttons/difficulty_button_disabled.png"),
+            image_path="Textures/Difficulty buttons/difficulty_button_disabled.png", pos=(1500, 200))
 
         choose_difficulty.changeCondition(play_mouse_pos)
         choose_difficulty.update(SCREEN)
 
-        level01_button_path = "../Textures/Level buttons/level01_button_stars-" + CAV_config.data[chosen_diff * 10][
+        level01_button_path = "Textures/Level buttons/level01_button_stars-" + CAV_config.data[chosen_diff * 10][
             0] + "_disabled.png"
         level01_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
@@ -76,7 +76,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level01_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level01_button.update(SCREEN)
 
-        level02_button_path = "../Textures/Level buttons/level02_button_stars-" + CAV_config.data[chosen_diff * 10 + 1][
+        level02_button_path = "Textures/Level buttons/level02_button_stars-" + CAV_config.data[chosen_diff * 10 + 1][
             0] + "_disabled.png"
         level02_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
@@ -89,7 +89,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level02_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level02_button.update(SCREEN)
 
-        level03_button_path = "../Textures/Level buttons/level03_button_stars-" + CAV_config.data[chosen_diff * 10 + 2][
+        level03_button_path = "Textures/Level buttons/level03_button_stars-" + CAV_config.data[chosen_diff * 10 + 2][
             0] + "_disabled.png"
         level03_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
@@ -102,7 +102,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level03_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level03_button.update(SCREEN)
 
-        level04_button_path = "../Textures/Level buttons/level04_button_stars-" + CAV_config.data[chosen_diff * 10 + 3][
+        level04_button_path = "Textures/Level buttons/level04_button_stars-" + CAV_config.data[chosen_diff * 10 + 3][
             0] + "_disabled.png"
         level04_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
@@ -115,7 +115,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level04_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level04_button.update(SCREEN)
 
-        level05_button_path = "../Textures/Level buttons/level05_button_stars-" + CAV_config.data[chosen_diff * 10 + 4][
+        level05_button_path = "Textures/Level buttons/level05_button_stars-" + CAV_config.data[chosen_diff * 10 + 4][
             0] + "_disabled.png"
         level05_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
@@ -128,7 +128,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level05_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level05_button.update(SCREEN)
 
-        level06_button_path = "../Textures/Level buttons/level06_button_stars-" + CAV_config.data[chosen_diff * 10 + 5][
+        level06_button_path = "Textures/Level buttons/level06_button_stars-" + CAV_config.data[chosen_diff * 10 + 5][
             0] + "_disabled.png"
         level06_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
@@ -141,7 +141,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level06_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level06_button.update(SCREEN)
 
-        level07_button_path = "../Textures/Level buttons/level07_button_stars-" + CAV_config.data[chosen_diff * 10 + 6][
+        level07_button_path = "Textures/Level buttons/level07_button_stars-" + CAV_config.data[chosen_diff * 10 + 6][
             0] + "_disabled.png"
         level07_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 2:
@@ -154,7 +154,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level07_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level07_button.update(SCREEN)
 
-        level08_button_path = "../Textures/Level buttons/level08_button_stars-" + CAV_config.data[chosen_diff * 10 + 7][
+        level08_button_path = "Textures/Level buttons/level08_button_stars-" + CAV_config.data[chosen_diff * 10 + 7][
             0] + "_disabled.png"
         level08_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 2:
@@ -167,7 +167,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level08_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level08_button.update(SCREEN)
 
-        level09_button_path = "../Textures/Level buttons/level09_button_stars-" + CAV_config.data[chosen_diff * 10 + 8][
+        level09_button_path = "Textures/Level buttons/level09_button_stars-" + CAV_config.data[chosen_diff * 10 + 8][
             0] + "_disabled.png"
         level09_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 2:
@@ -180,15 +180,15 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         if not info_updated:
             CAV_config.data = get_data()
 
-        endless_button_path = "../Textures/endless_mode_button_disabled.png"
+        endless_button_path = "Textures/endless_mode_button_disabled.png"
         endless_button = Button(image=pygame.image.load(endless_button_path), image_path=endless_button_path,
                                 pos=(1490, 830), endless_button=1)
 
         endless_button.changeCondition(play_mouse_pos)
         endless_button.update(SCREEN)
 
-        return_to_main_menu_P = Button(image=pygame.image.load("../Textures/return_button_disabled.png"),
-                                       image_path="../Textures/return_button_disabled.png", pos=(310, 900))
+        return_to_main_menu_P = Button(image=pygame.image.load("Textures/return_button_disabled.png"),
+                                       image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_main_menu_P.changeCondition(play_mouse_pos)
         return_to_main_menu_P.update(SCREEN)

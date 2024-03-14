@@ -7,21 +7,28 @@ from .utils import url
 
 def get_levels(data):
     token = open('token.txt', 'r').readlines()[0]
-    res = requests.post(url('/get_completions'), data=json.dumps({**data, "token": token}))
-    return res.json()
+    res = requests.post(url('/get_completions'), json={**data, "token": token})
+    if res.json() == {}:
+        return None
+    else:
+        return res.json()
 
 
 def get_settings(data):
     token = open('token.txt', 'r').readlines()[0]
-    res = requests.post(url('/get_settings'), data=json.dumps({**data, "token": token}))
-    return res.json()
+    res = requests.post(url('/get_settings'), json={**data, "token": token})
+    if res.json() == {}:
+        return None
+    else:
+        return res.json()
 
 
 def get_data(data):
     res = ["\n" for _ in range(208)]
     levels = get_levels(data)
     settings = get_settings(data)
-
+    if levels is None:
+        return None
     for level in levels:
         if level["difficulty"] == 4:
             res[207] = level["stars"]
@@ -43,6 +50,7 @@ def get_data(data):
     for i in range(settings["sounds_volume"], 100, 10):
         res[51 + i // 10] = "off"
 
+    print(res)
     return res
 
 

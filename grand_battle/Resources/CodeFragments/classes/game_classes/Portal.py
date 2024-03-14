@@ -12,7 +12,7 @@ class Portal(pygame.sprite.Sprite):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.difficulty = difficulty
-        self.image = pygame.image.load(f'../Textures/portal_{difficulty}.png')
+        self.image = pygame.image.load(f'Textures/portal_{difficulty}.png')
         self.rect = self.image.get_rect()
         self.rect.center = (pos_x, pos_y)
 

@@ -92,9 +92,9 @@ def check_token(data):
 
 def get_settings(data):
     return list(
-        db.session.execute(db.select(Settings).where(Settings.user_id == get_user_id(data["token"]))).scalars())
+        db.session.execute(db.select(Settings).where(Settings.user_id == get_user_id(data["token"]))).scalars())[0]
 
 
 def get_completions(data):
     return list(
-        db.session.execute(db.select(Completion).where(Completion.user_id == get_user_id(data["token"]))).scalars())
+        db.session.execute(db.select(Completion).where(Completion.user_id == get_user_id(data["token"]))).scalars())[0]

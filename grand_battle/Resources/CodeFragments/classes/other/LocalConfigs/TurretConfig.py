@@ -10,4 +10,6 @@ class TurretConfig:
         self.CHARACTER_SPEED = 5
         self.TURRETS_DESTROYED = 0
         res = get_settings({})
-        self.SONG_VOLUME, self.SOUNDS_VOLUME = res["song_volume"], res["sounds_volume"]
+        self.SONG_VOLUME, self. SOUNDS_VOLUME = 0, 0
+        if res is not None:
+            self.SONG_VOLUME, self.SOUNDS_VOLUME = res["song_volume"], res["sounds_volume"]

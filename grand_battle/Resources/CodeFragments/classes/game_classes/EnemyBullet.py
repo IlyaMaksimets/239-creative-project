@@ -8,7 +8,7 @@ class EnemyBullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.speed = speed
         self.direction = direction
-        image_path = "../Textures/enemy_bullet.png"
+        image_path = "Textures/enemy_bullet.png"
         if self.direction == -1:
             image_path = image_path[:-4] + "_rotated.png"
         self.image = pygame.image.load(image_path)

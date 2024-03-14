@@ -41,7 +41,7 @@ def endless_map_update(MAP_SEGMENTS_NUMS, MAP_SEGMENTS):
 
 def load_map(level):
     MAP_MATRIX = []
-    Map = open('../Other/level-maps/level0' + level + 'map.txt')
+    Map = open('Other/level-maps/level0' + level + 'map.txt')
     map_matrix = Map.readlines()
     for i in range(18):
         MAP_MATRIX.append([])
