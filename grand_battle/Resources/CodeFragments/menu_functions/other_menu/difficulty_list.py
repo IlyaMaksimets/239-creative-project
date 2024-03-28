@@ -13,7 +13,7 @@ def difficulty_list(return_to_main_menu_P, SCREEN, CANVAS, CAV_config, MUSIC_con
         return_to_main_menu_P.changeCondition(diffculty_list_mouse_pos)
         return_to_main_menu_P.update(SCREEN)
 
-        beginner_difficulty = Button(
+        beginner_difficulty = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/Difficulty buttons/beginner_difficulty_button_disabled.png"),
             image_path="Textures/Difficulty buttons/beginner_difficulty_button_disabled.png", pos=(1500, 300),
             difficulty_button=1)
@@ -21,7 +21,7 @@ def difficulty_list(return_to_main_menu_P, SCREEN, CANVAS, CAV_config, MUSIC_con
         beginner_difficulty.changeCondition(diffculty_list_mouse_pos)
         beginner_difficulty.update(SCREEN)
 
-        medium_difficulty = Button(
+        medium_difficulty = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/Difficulty buttons/medium_difficulty_button_disabled.png"),
             image_path="Textures/Difficulty buttons/medium_difficulty_button_disabled.png", pos=(1500, 400),
             difficulty_button=2)
@@ -29,7 +29,7 @@ def difficulty_list(return_to_main_menu_P, SCREEN, CANVAS, CAV_config, MUSIC_con
         medium_difficulty.changeCondition(diffculty_list_mouse_pos)
         medium_difficulty.update(SCREEN)
 
-        hard_difficulty = Button(
+        hard_difficulty = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/Difficulty buttons/hard_difficulty_button_disabled.png"),
             image_path="Textures/Difficulty buttons/hard_difficulty_button_disabled.png", pos=(1500, 500),
             difficulty_button=3)
@@ -37,7 +37,7 @@ def difficulty_list(return_to_main_menu_P, SCREEN, CANVAS, CAV_config, MUSIC_con
         hard_difficulty.changeCondition(diffculty_list_mouse_pos)
         hard_difficulty.update(SCREEN)
 
-        insane_difficulty = Button(
+        insane_difficulty = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/Difficulty buttons/insane_difficulty_button_disabled.png"),
             image_path="Textures/Difficulty buttons/insane_difficulty_button_disabled.png", pos=(1500, 600),
             difficulty_button=4)

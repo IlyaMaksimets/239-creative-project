@@ -5,19 +5,33 @@ from cfg import TOKEN_HALF_LENGTH, SEC_IN
 from models import *
 
 
-def get_user_id(user_token):
-    return list(db.session.execute(db.select(Token).where(Token.id == user_token)).scalars())[0]["user_id"]
+def create_token(user_id):
+    db.session.execute(
+        db.insert(Token).values(id=secrets.token_hex(TOKEN_HALF_LENGTH), user_id=user_id, date=datetime.datetime.now()))
+    db.session.commit()
+
+
+def get_user_id_by_token(user_token):
+    return list(db.session.execute(db.select(Token).where(Token.id == user_token)).scalars())[0].user_id
+
+
+def get_token_by_user_id(user_id):
+    return list(db.session.execute(db.select(Token).where(Token.user_id == user_id)).scalars())[0].id
+
+
+def get_user_id_by_login(username):
+    return list(db.session.execute(db.select(User).where(User.login == username)).scalars())[0].id
 
 
 def check_for_user(data):
-    user_in_db = list(db.session.execute(db.select(User).where(User.login == data["login"])).scalars())
+    user_in_db = list(db.session.execute(db.select(User).where(User.login == data["username"])).scalars())
 
     return len(user_in_db) > 0
 
 
 def check_for_completion(data):
     completion_in_db = list(db.session.execute(
-        db.select(Completion).where(Completion.user_id == get_user_id(data["token"]),
+        db.select(Completion).where(Completion.user_id == get_user_id_by_token(data["token"]),
                                     Completion.level == data["level"],
                                     Completion.difficulty == data["difficulty"])).scalars())
 
@@ -27,7 +41,7 @@ def check_for_completion(data):
 def create_user(data):
     user_id = secrets.token_hex(TOKEN_HALF_LENGTH)
     db.session.execute(
-        db.insert(User).values(id=user_id, login=data["login"], password=data["password"]))
+        db.insert(User).values(id=user_id, login=data["username"], password=data["password"]))
     db.session.execute(
         db.insert(Settings).values(user_id=user_id, song_volume=100,
                                    sounds_volume=100,
@@ -42,11 +56,12 @@ def create_user(data):
 
 def add_completion(data):
     if check_for_completion(data):
-        db.session.execute(db.delete(Completion).where(Completion.user_id == get_user_id(data["token"]),
+        db.session.execute(db.delete(Completion).where(Completion.user_id == get_user_id_by_token(data["token"]),
                                                        Completion.level == data["level"],
                                                        Completion.difficulty == data["difficulty"]))
     db.session.execute(
-        db.insert(Completion).values(id=secrets.token_hex(TOKEN_HALF_LENGTH), user_id=get_user_id(data["token"]),
+        db.insert(Completion).values(id=secrets.token_hex(TOKEN_HALF_LENGTH),
+                                     user_id=get_user_id_by_token(data["token"]),
                                      level=data["level"], difficulty=data["difficulty"],
                                      stars=data["stars"], time=data["time"]))
     db.session.commit()
@@ -70,7 +85,9 @@ def check_token(data):
     date = datetime.datetime.now().strftime("%Y:%m:%d:%H:%M:%S")
     date_values = list(map(int, date.split()))
     token_date = \
-        list(db.session.execute(db.select(Token).where(Token.user_id == get_user_id(data["token"]))).scalars())[0][
+        list(
+            db.session.execute(db.select(Token).where(Token.user_id == get_user_id_by_token(data["token"]))).scalars())[
+            0][
             "date"]
     token_date_values = list(map(int, token_date.split()))
 
@@ -83,7 +100,7 @@ def check_token(data):
                         token_date_values[4] * SEC_IN["MINUTE"] + token_date_values[5]
 
     if date_in_sec - token_date_in_sec > SEC_IN["MONTH"]:
-        db.session.execute(db.delete(Token).where(Token.user_id == get_user_id(data["token"])))
+        db.session.execute(db.delete(Token).where(Token.user_id == get_user_id_by_token(data["token"])))
         db.session.commit()
         return "expired"
     else:
@@ -91,10 +108,26 @@ def check_token(data):
 
 
 def get_settings(data):
-    return list(
-        db.session.execute(db.select(Settings).where(Settings.user_id == get_user_id(data["token"]))).scalars())[0]
+    res = list(
+        db.session.execute(
+            db.select(Settings).where(Settings.user_id == get_user_id_by_token(data["token"]))).scalars())[0]
+    return {"song_volume": res.song_volume, "sounds_volume": res.sounds_volume,
+            "move_left": res.move_left, "move_right": res.move_right, "move_up": res.move_up,
+            "move_down": res.move_down, "jump": res.jump, "pause": res.pause}
 
 
 def get_completions(data):
-    return list(
-        db.session.execute(db.select(Completion).where(Completion.user_id == get_user_id(data["token"]))).scalars())[0]
+    if "username" not in data.keys():
+        res = list(
+            db.session.execute(
+                db.select(Completion).where(Completion.user_id == get_user_id_by_token(data["token"]))).scalars())
+
+    else:
+        res = list(
+            db.session.execute(
+                db.select(Completion).where(
+                    Completion.user_id == get_user_id_by_login(data["username"]))).scalars())
+    ans = []
+    for comp in res:
+        ans.append({"level": comp.level, "difficulty": comp.difficulty, "stars": comp.stars, "time": comp.time})
+    return ans

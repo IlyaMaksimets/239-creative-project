@@ -1,20 +1,24 @@
 import '../styles/LevelStats.css';
 import {useState} from "react";
 
-export default function LevelStats({level, info}) {
-    const [levelStars, setLevelStars] = useState(info["stars"]);
-    const [levelHours, setLevelHours] = useState(info["hours"]);
-    const [levelMinutes, setLevelMinutes] = useState(info["minutes"]);
-    const [levelSeconds, setLevelSeconds] = useState(info["seconds"]);
-    if (levelStars) {
+export default function LevelStats({info}) {
+    if (info.stars !== "-") {
         return <>
-            <p className={"levelInfoPart"}>Level {level}</p>
-            <p className={"levelInfoPart"}>Stars: {levelStars}</p>
-            <p className={"levelInfoPart"}>Time: {levelHours} hours {levelMinutes} minutes {levelSeconds}</p>
+            <p className={"levelInfoPart"}>Level {info.level}</p>
+            <p className={"levelInfoPart"}>Difficulty: {info.difficulty === 0 ? "beginner" :
+                info.difficulty === 1 ? "medium" :
+                    info.difficulty === 2 ? "hard" : "insane"
+            }</p>
+            <p className={"levelInfoPart"}>Stars: {info.stars}</p>
+            <p className={"levelInfoPart"}>Time: {info.time}</p>
         </>
     } else {
         return <>
-            <p className={"levelInfoPart"}>Level {level}</p>
+            <p className={"levelInfoPart"}>Level {info.level}</p>
+            <p className={"levelInfoPart"}>Difficulty: {info.difficulty === 0 ? "beginner" :
+                info.difficulty === 1 ? "medium" :
+                    info.difficulty === 2 ? "hard" : "insane"
+            }</p>
             <p className={"levelInfoPart"}>Stars: -</p>
             <p className={"levelInfoPart"}>Time: -</p>
         </>

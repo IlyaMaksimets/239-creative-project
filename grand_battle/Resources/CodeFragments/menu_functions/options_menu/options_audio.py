@@ -13,33 +13,33 @@ def options_audio(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
         SCREEN.fill("#121212")
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(0, 0, 240, 1080))
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(1680, 0, 240, 1080))
-        return_to_main_menu_O = Button(image=pygame.image.load("Textures/return_button_disabled.png"),
+        return_to_main_menu_O = Button(data=CAV_config.data, image=pygame.image.load("Textures/return_button_disabled.png"),
                                        image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_main_menu_O.changeCondition(options_mouse_pos)
         return_to_main_menu_O.update(SCREEN)
 
-        song_on_off_button = Button(image=pygame.image.load("Textures/music_en_dis_button_disabled.png"),
+        song_on_off_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/music_en_dis_button_disabled.png"),
                                     image_path="Textures/music_en_dis_button_disabled.png", pos=(730, 300))
         song_on_off_button.changeCondition(options_mouse_pos)
         song_on_off_button.update(SCREEN)
 
-        sounds_on_off_button = Button(image=pygame.image.load("Textures/volume_en_dis_button_disabled.png"),
+        sounds_on_off_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/volume_en_dis_button_disabled.png"),
                                       image_path="Textures/volume_en_dis_button_disabled.png", pos=(730, 600))
         sounds_on_off_button.changeCondition(options_mouse_pos)
         sounds_on_off_button.update(SCREEN)
 
-        audio_button = Button(image=pygame.image.load("Textures/audio_button_disabled.png"),
+        audio_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/audio_button_disabled.png"),
                               image_path="Textures/audio_button_disabled.png", pos=(400, 200))
         audio_button.changeCondition(options_mouse_pos)
         audio_button.update(SCREEN)
 
-        video_button = Button(image=pygame.image.load("Textures/video_button_disabled.png"),
+        video_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/video_button_disabled.png"),
                               image_path="Textures/video_button_disabled.png", pos=(400, 350))
         video_button.changeCondition(options_mouse_pos)
         video_button.update(SCREEN)
 
-        keyboard_button = Button(image=pygame.image.load("Textures/keyboard_button_disabled.png"),
+        keyboard_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/keyboard_button_disabled.png"),
                                  image_path="Textures/keyboard_button_disabled.png", pos=(400, 500))
         keyboard_button.changeCondition(options_mouse_pos)
         keyboard_button.update(SCREEN)
@@ -53,7 +53,7 @@ def options_audio(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
                 song_vol_button_condition = "on"
             CAV_config.SONG_VOLUME_button_path = "Textures/volume_button_" + song_vol_button_condition + "_disabled.png"
             CAV_config.SONG_VOLUME_buttons.append(
-                Button(image=pygame.image.load(CAV_config.SONG_VOLUME_button_path),
+                Button(data=CAV_config.data, image=pygame.image.load(CAV_config.SONG_VOLUME_button_path),
                        image_path=CAV_config.SONG_VOLUME_button_path,
                        pos=(1000 + i * 70, 300)))
         for i in range(10):
@@ -70,7 +70,7 @@ def options_audio(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
             CAV_config.SOUNDS_VOLUME_button_path = "Textures/volume_button_" + sounds_vol_button_condition + \
                                                    "_disabled.png"
             CAV_config.SOUNDS_VOLUME_buttons.append(
-                Button(image=pygame.image.load(CAV_config.SOUNDS_VOLUME_button_path),
+                Button(data=CAV_config.data, image=pygame.image.load(CAV_config.SOUNDS_VOLUME_button_path),
                        image_path=CAV_config.SOUNDS_VOLUME_button_path,
                        pos=(1000 + i * 70, 600)))
         for i in range(10):

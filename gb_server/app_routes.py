@@ -7,25 +7,26 @@ simple_page = Blueprint('simple_page', __name__)
 
 @simple_page.route('/', methods=['GET'])
 def main_page():
-    if 'login' in session:
-        return session['login']
+    if 'username' in session:
+        return session['username']
     abort(401)
 
 
 @simple_page.route('/login', methods=['POST'])
 def login_page():
-    if 'login' in session:
+    if 'username' in session:
         abort(400)
 
-    login = request.json['username']
+    username = request.json['username']
     password = request.json['password']
 
-    user_exists = check_for_user({"login": login, "password": password})
+    user_exists = check_for_user({"username": username, "password": password})
 
-    if user_exists is not None:
-        session['login'] = login
+    if user_exists:
+        session['username'] = username
         session['password'] = password
-        return {"status": 200, "token": user_exists}
+        create_token(get_user_id_by_login(username))
+        return {"status": 200, "token": get_token_by_user_id(get_user_id_by_login(username))}
 
     else:
         abort(400)
@@ -33,17 +34,17 @@ def login_page():
 
 @simple_page.route('/register', methods=['POST'])
 def register_page():
-    if 'login' in session:
+    if 'username' in session:
         abort(400)
 
-    login = request.json['login']
+    login = request.json['username']
     password = request.json['password']
     passwordConfirmation = request.json['passwordConfirmation']
 
     user_exists = check_for_user({"login": login, "password": password})
 
     if not user_exists and password == passwordConfirmation:
-        session['login'] = login
+        session['username'] = login
         session['password'] = password
         create_user({"login": login, "password": password})
         return '-created-'
@@ -54,13 +55,8 @@ def register_page():
 
 @simple_page.route('/logout', methods=['POST'])
 def logout_page():
-    session.pop('login', None)
+    session.pop('username', None)
     return '-session-finished-'
-
-
-@simple_page.route('/change_avatar', methods=['POST'])
-def change_avatar_page():
-    return "-changed-"
 
 
 @simple_page.route('/change_settings', methods=['POST'])
@@ -80,12 +76,13 @@ def change_settings_query():
 
 @simple_page.route('/add_completion', methods=['POST'])
 def add_completion_query():
-    login = request.json["username"]
+    user_token = request.json["token"]
     level = request.json["level"]
     difficulty = request.json["difficulty"]
     stars = request.json["stars"]
     time = request.json["time"]
-    add_completion({"login": login, "level": level, "difficulty": difficulty, "stars": stars, "time": time})
+    add_completion({"token": user_token, "level": level, "difficulty": difficulty, "stars": stars, "time": time})
+    return {"status": 200}
 
 
 @simple_page.route('/get_completions', methods=['POST'])
@@ -93,7 +90,10 @@ def get_completions_query():
     if len(request.json["token"]) < 2 * TOKEN_HALF_LENGTH:
         return {}
     else:
-        return get_completions({"token": request.json["token"]})
+        if "username" not in session:
+            return {"data": get_completions({"token": request.json["token"]})}
+        else:
+            return {"data": get_completions({"username": session['username']})}
 
 
 @simple_page.route('/get_settings', methods=['POST'])
@@ -101,4 +101,4 @@ def get_settings_query():
     if len(request.json["token"]) < 2 * TOKEN_HALF_LENGTH:
         return {}
     else:
-        return get_settings({"token": request.json["token"]})
+        return {"data": get_settings({"token": request.json["token"]})}

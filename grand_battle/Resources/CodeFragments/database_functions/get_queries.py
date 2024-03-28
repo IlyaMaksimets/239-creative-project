@@ -1,5 +1,3 @@
-import json
-
 import requests
 
 from .utils import url
@@ -11,20 +9,34 @@ def get_levels(data):
     if res.json() == {}:
         return None
     else:
-        return res.json()
+        return res.json()['data']
 
 
 def get_settings(data):
-    token = open('token.txt', 'r').readlines()[0]
+    token = open("token.txt", 'r').readlines()
+    if len(token):
+        token = token[0]
     res = requests.post(url('/get_settings'), json={**data, "token": token})
     if res.json() == {}:
         return None
     else:
-        return res.json()
+        return res.json()['data']
 
 
 def get_data(data):
     res = ["\n" for _ in range(208)]
+    for i in range(40):
+        if i % 10 == 9:
+            continue
+        else:
+            res[i] = "0\n"
+
+    for i in range(62, 207):
+        if i % 4 == 1:
+            continue
+        else:
+            res[i] = "00\n"
+
     levels = get_levels(data)
     settings = get_settings(data)
     if levels is None:
@@ -35,22 +47,21 @@ def get_data(data):
             continue
         res[level["difficulty"] * 10 + level["level"] - 1] = str(level["stars"]) + '\n'
         time = level["time"].split(":")
-        index = 63 + 36 * level["difficulty"] + (level["level"] - 1) * 4
+        index = 62 + 36 * level["difficulty"] + (level["level"] - 1) * 4
         res[index] = str(time[0])
         res[index + 1] = str(time[1])
         res[index + 2] = str(time[2])
 
     for i in range(0, settings["song_volume"], 10):
-        res[40 + i // 10] = "on"
+        res[40 + i // 10] = "on\n"
     for i in range(settings["song_volume"], 100, 10):
-        res[40 + i // 10] = "off"
+        res[40 + i // 10] = "off\n"
 
     for i in range(0, settings["sounds_volume"], 10):
-        res[51 + i // 10] = "on"
+        res[51 + i // 10] = "on\n"
     for i in range(settings["sounds_volume"], 100, 10):
-        res[51 + i // 10] = "off"
+        res[51 + i // 10] = "off\n"
 
-    print(res)
     return res
 
 
@@ -58,6 +69,7 @@ def get_data_and_keys(data):
     settings = get_settings(data)
     res = get_data(data)
     keybinds = dict()
-    for key, value in settings:
-        keybinds[key] = value
-    return [res, settings]
+    for key in settings.keys():
+        keybinds[key] = settings[key]
+    keybinds['shoot'] = "LMB"
+    return [res, keybinds]

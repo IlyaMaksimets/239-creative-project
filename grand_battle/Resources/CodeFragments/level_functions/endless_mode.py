@@ -29,17 +29,17 @@ def initialize_pause_menu(SCREEN):
     pause_text = get_font(70).render("Game paused", True, "#b68f40")
     pause_rect = pause_text.get_rect(center=(960, 300))
     SCREEN.blit(pause_text, pause_rect)
-    return Button(image=pygame.image.load("Textures/continue_button_disabled.png"),
-                  image_path="Textures/continue_button_disabled.png", pos=(650, 700)), Button(
+    return Button(data=CAV_config.data, image=pygame.image.load("Textures/continue_button_disabled.png"),
+                  image_path="Textures/continue_button_disabled.png", pos=(650, 700)), Button(data=CAV_config.data,
         image=pygame.image.load("Textures/restart_button_disabled.png"),
-        image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(
+        image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
         image=pygame.image.load("Textures/exit_button_disabled.png"),
         image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
 
 
 def initialize_restart_menu():
-    return Button(image=pygame.image.load("Textures/restart_button_disabled.png"),
-                  image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(
+    return Button(data=CAV_config.data, image=pygame.image.load("Textures/restart_button_disabled.png"),
+                  image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
         image=pygame.image.load("Textures/exit_button_disabled.png"),
         image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
 

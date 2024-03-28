@@ -65,20 +65,20 @@ def set_total_time(ticks):
     return seconds, minutes, hours
 
 
-def initialize_and_draw_pause_menu(SCREEN, after_death=False):
+def initialize_and_draw_pause_menu(SCREEN, CAV_config, after_death=False):
     if after_death:
-        return Button(image=pygame.image.load("Textures/restart_button_disabled.png"),
-                      image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(
+        return Button(data=CAV_config.data, image=pygame.image.load("Textures/restart_button_disabled.png"),
+                      image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
             image=pygame.image.load("Textures/exit_button_disabled.png"),
             image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
 
     pause_text = get_font(70).render("Game paused", True, "#b68f40")
     pause_rect = pause_text.get_rect(center=(960, 300))
     SCREEN.blit(pause_text, pause_rect)
-    return Button(image=pygame.image.load("Textures/continue_button_disabled.png"),
-                  image_path="Textures/continue_button_disabled.png", pos=(650, 700)), Button(
+    return Button(data=CAV_config.data, image=pygame.image.load("Textures/continue_button_disabled.png"),
+                  image_path="Textures/continue_button_disabled.png", pos=(650, 700)), Button(data=CAV_config.data,
         image=pygame.image.load("Textures/restart_button_disabled.png"),
-        image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(
+        image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
         image=pygame.image.load("Textures/exit_button_disabled.png"),
         image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
 
@@ -137,10 +137,6 @@ def handle_returned_data(GROUPS_config, CAV_config, MAPS_config, change, player)
         player.realize_buff(i)
 
 
-def spawn_turrets_player_and_portal(CAV_config, GROUPS_config, MAPS_config, Level_launch_config, player):
-    pass
-
-
 def handle_event_type_and_key(CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config, Level_launch_config,
                               player,
                               SCREEN, CANVAS, clock, level_num):
@@ -169,7 +165,7 @@ def handle_event_type_and_key(CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
                 while paused:
                     play_mouse_pos = pygame.mouse.get_pos()
 
-                    continue_button, retry_button, return_to_level_menu = initialize_and_draw_pause_menu(SCREEN)
+                    continue_button, retry_button, return_to_level_menu = initialize_and_draw_pause_menu(SCREEN, CAV_config)
                     continue_button.changeCondition(play_mouse_pos)
                     continue_button.update(SCREEN)
                     retry_button.changeCondition(play_mouse_pos)
@@ -253,7 +249,7 @@ def restart_menu_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config
                                  GROUPS_config, level_num):
     play_mouse_pos = pygame.mouse.get_pos()
 
-    retry_button, return_to_level_menu = initialize_and_draw_pause_menu(SCREEN, after_death=True)
+    retry_button, return_to_level_menu = initialize_and_draw_pause_menu(SCREEN, CAV_config, after_death=True)
     retry_button.changeCondition(play_mouse_pos)
     retry_button.update(SCREEN)
     return_to_level_menu.changeCondition(play_mouse_pos)
@@ -362,10 +358,11 @@ def level_launch(level_num, clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMA
     player = Character(700, 770, CAV_config.CHARACTER_SPEED, Level_launch_config.CHARACTER_HEALTH,
                        MAPS_config.MAP_MATRIX,
                        CAV_config.screen_scroll)
-    portal = Portal(6150, Level_launch_config.portal_y, CAV_config.CHOSEN_DIFFICULTY)
-    clock1 = pygame.time.get_ticks()
 
     Level_launch_config.portal_y = get_portal_y(MAPS_config)
+
+    portal = Portal(6150, Level_launch_config.portal_y, CAV_config.CHOSEN_DIFFICULTY)
+    clock1 = pygame.time.get_ticks()
 
     GROUPS_config = add_turrets(GROUPS_config, MAPS_config, Level_launch_config)
 

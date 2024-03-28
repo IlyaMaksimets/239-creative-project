@@ -13,7 +13,7 @@ class GlobalConstAndVarConfig:
         self.TURRETS_DESTROYED = 0
         self.screen_scroll = 0
         self.levels_page = 1
-        self.data = ['-' for i in range(207)]
+        self.data = ['-' for i in range(208)]
         self.CHOSEN_DIFFICULTY = 'beginner'
         self.SONG_VOLUME = 0
         self.SOUNDS_VOLUME = 0

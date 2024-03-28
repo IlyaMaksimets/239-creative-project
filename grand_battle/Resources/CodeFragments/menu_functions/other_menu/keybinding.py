@@ -13,7 +13,7 @@ def keybinding(action, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, 
 
         SCREEN.fill("#121212")
 
-        return_to_options_O = Button(image=pygame.image.load("Textures/return_button_disabled.png"),
+        return_to_options_O = Button(data=CAV_config.data, image=pygame.image.load("Textures/return_button_disabled.png"),
                                      image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_options_O.changeCondition(options_mouse_pos)

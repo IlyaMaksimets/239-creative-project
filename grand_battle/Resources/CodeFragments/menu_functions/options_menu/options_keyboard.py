@@ -14,23 +14,23 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
         SCREEN.fill("#121212")
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(0, 0, 240, 1080))
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(1680, 0, 240, 1080))
-        return_to_main_menu_O = Button(image=pygame.image.load("Textures/return_button_disabled.png"),
+        return_to_main_menu_O = Button(data=CAV_config.data, image=pygame.image.load("Textures/return_button_disabled.png"),
                                        image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_main_menu_O.changeCondition(options_mouse_pos)
         return_to_main_menu_O.update(SCREEN)
 
-        audio_button = Button(image=pygame.image.load("Textures/audio_button_disabled.png"),
+        audio_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/audio_button_disabled.png"),
                               image_path="Textures/audio_button_disabled.png", pos=(400, 200))
         audio_button.changeCondition(options_mouse_pos)
         audio_button.update(SCREEN)
 
-        video_button = Button(image=pygame.image.load("Textures/video_button_disabled.png"),
+        video_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/video_button_disabled.png"),
                               image_path="Textures/video_button_disabled.png", pos=(400, 350))
         video_button.changeCondition(options_mouse_pos)
         video_button.update(SCREEN)
 
-        keyboard_button = Button(image=pygame.image.load("Textures/keyboard_button_disabled.png"),
+        keyboard_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/keyboard_button_disabled.png"),
                                  image_path="Textures/keyboard_button_disabled.png", pos=(400, 500))
         keyboard_button.changeCondition(options_mouse_pos)
         keyboard_button.update(SCREEN)
@@ -66,7 +66,7 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
         change_key_buttons = []
 
         for i in range(7):
-            change_button = Button(image=pygame.image.load("Textures/change_button_disabled.png"),
+            change_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/change_button_disabled.png"),
                                    image_path="Textures/change_button_disabled.png", pos=(1550, i * 100 + 150))
             change_button.changeCondition(options_mouse_pos)
             change_button.update(SCREEN)

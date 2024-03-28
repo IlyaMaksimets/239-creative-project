@@ -2,15 +2,15 @@ import sys
 
 import pygame
 
-from grand_battle.Resources.CodeFragments.database_functions import keyconverting
 from grand_battle.Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.database_functions import get_data_and_keys, login
+from grand_battle.Resources.CodeFragments.database_functions import keyconverting
 from grand_battle.Resources.CodeFragments.other_functions import get_font
-from grand_battle.Resources.CodeFragments.database_functions import get_data_and_keys
 
 
 def login_menu(SCREEN):
-    login_input_box = pygame.Rect(100, 100, 140, 32)
-    password_input_box = pygame.Rect(100, 150, 140, 32)
+    login_input_box = pygame.Rect(300, 100, 140, 32)
+    password_input_box = pygame.Rect(300, 150, 140, 32)
     font = pygame.font.Font(None, 32)
     color_inactive = pygame.Color('lightskyblue3')
     color_active = pygame.Color('dodgerblue2')
@@ -21,6 +21,7 @@ def login_menu(SCREEN):
     login_text = ''
     password_text = ''
     while True:
+        menu_mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -64,17 +65,28 @@ def login_menu(SCREEN):
         SCREEN.blit(password_txt_surface, (password_input_box.x + 5, password_input_box.y + 5))
         pygame.draw.rect(SCREEN, password_box_color, password_input_box, 2)
 
+        submit_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/play_button_disabled.png"),
+                               image_path="Textures/play_button_disabled.png", pos=(960, 400))
+
+        submit_button.changeCondition(menu_mouse_pos)
+        submit_button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if submit_button.checkForInput(menu_mouse_pos):
+                    if login({"username": login_text, "password": password_text}):
+                        return
+
         pygame.display.update()
 
 
 def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
-    token = open("token.txt", 'r').readlines()[0]
-    if len(token) < 20:
+    token = open("token.txt", 'r').readlines()
+    if not len(token):
         login_menu(SCREEN)
     if CAV_config.first_launch:
         CAV_config.data, CAV_config.keybinds = get_data_and_keys({})
         CAV_config.keyactions = keyconverting(CAV_config.keybinds, CAV_config.keyactions)
-
         for i in range(40, 50):
             if CAV_config.data[i][:2] == "on":
                 CAV_config.SONG_VOLUME += 10
@@ -101,11 +113,11 @@ def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
         menu_rect = menu_text.get_rect(center=(960, 200))
         SCREEN.blit(menu_text, menu_rect)
 
-        play_button = Button(image=pygame.image.load("Textures/play_button_disabled.png"),
+        play_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/play_button_disabled.png"),
                              image_path="Textures/play_button_disabled.png", pos=(960, 400))
-        options_button = Button(image=pygame.image.load("Textures/options_button_disabled.png"),
+        options_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/options_button_disabled.png"),
                                 image_path="Textures/options_button_disabled.png", pos=(960, 600))
-        quit_button = Button(image=pygame.image.load("Textures/quit_button_disabled.png"),
+        quit_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/quit_button_disabled.png"),
                              image_path="Textures/quit_button_disabled.png", pos=(960, 800))
 
         for button in [play_button, options_button, quit_button]:
@@ -133,5 +145,3 @@ def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
                     pygame.quit()
                     sys.exit()
         pygame.display.update()
-
-

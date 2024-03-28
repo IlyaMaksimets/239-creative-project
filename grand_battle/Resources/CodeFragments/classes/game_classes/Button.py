@@ -2,13 +2,8 @@ import pygame
 
 from grand_battle.Resources.CodeFragments.classes import IconConfig, ButtonConfig
 from grand_battle.Resources.CodeFragments.other_functions import get_font, get_difficulty_description_parts
-from grand_battle.Resources.CodeFragments.database_functions import get_data
 
 Button_config = ButtonConfig()
-
-token = open("token.txt", 'r').readlines()[0]
-if len(token) < 20:
-    data = get_data({})
 
 
 def get_c_d(CHOSEN_DIFFICULTY):
@@ -31,7 +26,7 @@ def blit_level_icons(level_icons):
     Button_config.SCREEN.blit(level_icons[5], (950, 500))
 
 
-def get_time_and_status(c_d, l_b):
+def get_time_and_status(c_d, l_b, data):
     index = 62 + c_d * 36 + l_b * 4
     status = data[c_d * 10 + l_b][0] + " stars"
     time = data[index][:2] + " hr " + data[index + 1][:2] + " min " + data[index + 2][:2] + " sec"
@@ -44,7 +39,7 @@ def get_time_and_status(c_d, l_b):
 
 
 class Button:
-    def __init__(self, image, image_path, pos, difficulty_button=0, level_button=0, endless_button=0):
+    def __init__(self, image, image_path, pos, data, difficulty_button=0, level_button=0, endless_button=0):
         self.image = image
         self.image_path = image_path
         self.x_pos = pos[0]
@@ -53,6 +48,7 @@ class Button:
         self.difficulty_button = difficulty_button
         self.level_button = level_button
         self.endless_button = endless_button
+        self.data = data
 
     def update(self, SCREEN):
         if self.image is not None:
@@ -75,7 +71,7 @@ class Button:
             if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top,
                                                                                               self.rect.bottom):
                 personal_best_text = get_font(Button_config.LEVEL_STATUS_FONT_SIZE).render(
-                    "Personal best: " + data[len(data) - 1] + " metres",
+                    "Personal best: " + self.data[len(self.data) - 1] + " metres",
                     True, "#b68f40")
                 personal_best_rect = personal_best_text.get_rect(center=(1000, 900))
                 Button_config.SCREEN.blit(personal_best_text, personal_best_rect)
@@ -84,7 +80,7 @@ class Button:
             if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top,
                                                                                               self.rect.bottom):
                 l_b = self.level_button - 1
-                time, status = get_time_and_status(c_d, l_b)
+                time, status = get_time_and_status(c_d, l_b, self.data)
                 level_status_text = get_font(Button_config.LEVEL_STATUS_FONT_SIZE).render("Status: " + status, True,
                                                                                           "#b68f40")
                 level_status_rect = level_status_text.get_rect(center=(1000, 840))
@@ -98,7 +94,7 @@ class Button:
                                                                                               self.rect.bottom):
                 stars_arr = []
                 for i in range(9):
-                    stars_arr.append(data[(self.difficulty_button - 1) * 10 + i][0])
+                    stars_arr.append(self.data[(self.difficulty_button - 1) * 10 + i][0])
 
                 Icon_config = IconConfig()
                 Icon_config.initialize_icon_paths(stars_arr)

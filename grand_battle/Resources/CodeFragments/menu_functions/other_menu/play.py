@@ -8,7 +8,7 @@ from grand_battle.Resources.CodeFragments.database_functions import get_data
 
 
 def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
-    info_updated = False
+    CAV_config.data = get_data({})
     while True:
         chosen_diff = 0
         if CAV_config.CHOSEN_DIFFICULTY == 'beginner':
@@ -26,14 +26,14 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(0, 0, 240, 1080))
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(1680, 0, 240, 1080))
 
-        CAV_config.levels_page_forward_button = Button(
+        CAV_config.levels_page_forward_button = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/forward_list_button_disabled.png"),
             image_path="Textures/forward_list_button_disabled.png", pos=CAV_config.OOB)
 
         CAV_config.levels_page_forward_button.changeCondition(play_mouse_pos)
         CAV_config.levels_page_forward_button.update(SCREEN)
 
-        CAV_config.levels_page_back_button = Button(
+        CAV_config.levels_page_back_button = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/back_list_button_disabled.png"),
             image_path="Textures/back_list_button_disabled.png", pos=CAV_config.OOB)
 
@@ -41,7 +41,7 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         CAV_config.levels_page_back_button.update(SCREEN)
 
         if CAV_config.levels_page == 1:
-            CAV_config.levels_page_forward_button = Button(
+            CAV_config.levels_page_forward_button = Button(data=CAV_config.data,
                 image=pygame.image.load("Textures/forward_list_button_disabled.png"),
                 image_path="Textures/forward_list_button_disabled.png", pos=(1400, 500))
 
@@ -49,14 +49,14 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
             CAV_config.levels_page_forward_button.update(SCREEN)
 
         else:
-            CAV_config.levels_page_back_button = Button(
+            CAV_config.levels_page_back_button = Button(data=CAV_config.data,
                 image=pygame.image.load("Textures/back_list_button_disabled.png"),
                 image_path="Textures/back_list_button_disabled.png", pos=(1320, 500))
 
             CAV_config.levels_page_back_button.changeCondition(play_mouse_pos)
             CAV_config.levels_page_back_button.update(SCREEN)
 
-        choose_difficulty = Button(
+        choose_difficulty = Button(data=CAV_config.data,
             image=pygame.image.load("Textures/Difficulty buttons/difficulty_button_disabled.png"),
             image_path="Textures/Difficulty buttons/difficulty_button_disabled.png", pos=(1500, 200))
 
@@ -68,10 +68,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level01_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
             level01_button_pos = (400, 300)
-        level01_button = Button(image=pygame.image.load(level01_button_path), image_path=level01_button_path,
+        level01_button = Button(data=CAV_config.data, image=pygame.image.load(level01_button_path), image_path=level01_button_path,
                                 pos=level01_button_pos, level_button=1)
-        if not info_updated:
-            CAV_config.data = get_data()
 
         level01_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level01_button.update(SCREEN)
@@ -81,10 +79,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level02_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
             level02_button_pos = (750, 300)
-        level02_button = Button(image=pygame.image.load(level02_button_path), image_path=level02_button_path,
+        level02_button = Button(data=CAV_config.data, image=pygame.image.load(level02_button_path), image_path=level02_button_path,
                                 pos=level02_button_pos, level_button=2)
-        if not info_updated:
-            CAV_config.data = get_data()
 
         level02_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level02_button.update(SCREEN)
@@ -94,10 +90,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level03_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
             level03_button_pos = (1100, 300)
-        level03_button = Button(image=pygame.image.load(level03_button_path), image_path=level03_button_path,
+        level03_button = Button(data=CAV_config.data, image=pygame.image.load(level03_button_path), image_path=level03_button_path,
                                 pos=level03_button_pos, level_button=3)
-        if not info_updated:
-            CAV_config.data = get_data()
 
         level03_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level03_button.update(SCREEN)
@@ -107,11 +101,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level04_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
             level04_button_pos = (400, 650)
-        level04_button = Button(image=pygame.image.load(level04_button_path), image_path=level04_button_path,
+        level04_button = Button(data=CAV_config.data, image=pygame.image.load(level04_button_path), image_path=level04_button_path,
                                 pos=level04_button_pos, level_button=4)
-        if not info_updated:
-            CAV_config.data = get_data()
-
         level04_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level04_button.update(SCREEN)
 
@@ -120,11 +111,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level05_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
             level05_button_pos = (750, 650)
-        level05_button = Button(image=pygame.image.load(level05_button_path), image_path=level05_button_path,
+        level05_button = Button(data=CAV_config.data, image=pygame.image.load(level05_button_path), image_path=level05_button_path,
                                 pos=level05_button_pos, level_button=5)
-        if not info_updated:
-            CAV_config.data = get_data()
-
         level05_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level05_button.update(SCREEN)
 
@@ -133,11 +121,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level06_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 1:
             level06_button_pos = (1100, 650)
-        level06_button = Button(image=pygame.image.load(level06_button_path), image_path=level06_button_path,
+        level06_button = Button(data=CAV_config.data, image=pygame.image.load(level06_button_path), image_path=level06_button_path,
                                 pos=level06_button_pos, level_button=6)
-        if not info_updated:
-            CAV_config.data = get_data()
-
         level06_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level06_button.update(SCREEN)
 
@@ -146,11 +131,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level07_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 2:
             level07_button_pos = (400, 300)
-        level07_button = Button(image=pygame.image.load(level07_button_path), image_path=level07_button_path,
+        level07_button = Button(data=CAV_config.data, image=pygame.image.load(level07_button_path), image_path=level07_button_path,
                                 pos=level07_button_pos, level_button=7)
-        if not info_updated:
-            CAV_config.data = get_data()
-
         level07_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level07_button.update(SCREEN)
 
@@ -159,11 +141,8 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level08_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 2:
             level08_button_pos = (750, 300)
-        level08_button = Button(image=pygame.image.load(level08_button_path), image_path=level08_button_path,
+        level08_button = Button(data=CAV_config.data, image=pygame.image.load(level08_button_path), image_path=level08_button_path,
                                 pos=level08_button_pos, level_button=8)
-        if not info_updated:
-            CAV_config.data = get_data()
-
         level08_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level08_button.update(SCREEN)
 
@@ -172,28 +151,23 @@ def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, G
         level09_button_pos = CAV_config.OOB
         if CAV_config.levels_page == 2:
             level09_button_pos = (1100, 300)
-        level09_button = Button(image=pygame.image.load(level09_button_path), image_path=level09_button_path,
+        level09_button = Button(data=CAV_config.data, image=pygame.image.load(level09_button_path), image_path=level09_button_path,
                                 pos=level09_button_pos, level_button=9)
 
         level09_button.changeCondition(play_mouse_pos, CHOSEN_DIFFICULTY=CAV_config.CHOSEN_DIFFICULTY)
         level09_button.update(SCREEN)
-        if not info_updated:
-            CAV_config.data = get_data()
-
         endless_button_path = "Textures/endless_mode_button_disabled.png"
-        endless_button = Button(image=pygame.image.load(endless_button_path), image_path=endless_button_path,
+        endless_button = Button(data=CAV_config.data, image=pygame.image.load(endless_button_path), image_path=endless_button_path,
                                 pos=(1490, 830), endless_button=1)
 
         endless_button.changeCondition(play_mouse_pos)
         endless_button.update(SCREEN)
 
-        return_to_main_menu_P = Button(image=pygame.image.load("Textures/return_button_disabled.png"),
+        return_to_main_menu_P = Button(data=CAV_config.data, image=pygame.image.load("Textures/return_button_disabled.png"),
                                        image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_main_menu_P.changeCondition(play_mouse_pos)
         return_to_main_menu_P.update(SCREEN)
-
-        info_updated = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
