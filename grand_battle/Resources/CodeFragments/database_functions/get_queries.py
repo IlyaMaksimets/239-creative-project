@@ -28,14 +28,12 @@ def get_data(data):
     for i in range(40):
         if i % 10 == 9:
             continue
-        else:
-            res[i] = "0\n"
+        res[i] = "0\n"
 
     for i in range(62, 207):
         if i % 4 == 1:
             continue
-        else:
-            res[i] = "00\n"
+        res[i] = "00\n"
 
     levels = get_levels(data)
     settings = get_settings(data)
