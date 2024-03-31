@@ -203,7 +203,7 @@ def game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES
     clock.tick(CAV_config.FPS)
     level_background(Endless_mode_config.level_num, player.get_screen_scroll(), CANVAS, SCREEN,
                      MAPS_config.MAP_MATRIX,
-                     IMAGES_config.wall_image, IMAGES_config.ladder_image)
+                     IMAGES_config.wall_image, IMAGES_config.ladder_image, 4295)
     change, CAV_config.GLOBAL_X = player.move(Endless_mode_config.move_left, Endless_mode_config.move_right,
                                               'endless')
 
@@ -223,19 +223,16 @@ def game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES
     CAV_config.TURRETS_DESTROYED_percentage = CAV_config.TURRETS_DESTROYED / Endless_mode_config.turrets_spawned * 100
 
     if portal.check_completion(player):
-        level_background(Endless_mode_config.level_num, player.get_screen_scroll(), CANVAS, SCREEN,
-                         MAPS_config.MAP_MATRIX,
-                         IMAGES_config.wall_image, IMAGES_config.ladder_image)
         clear_groups(GROUPS_config)
         MAPS_config.MAP_MATRIX, MAPS_config.MAP_SEGMENTS_NUMS = endless_map_update(MAPS_config.MAP_SEGMENTS_NUMS,
                                                                                    MAPS_config.MAP_SEGMENTS)
 
         player, portal = spawn_turrets_player_and_portal(CAV_config, GROUPS_config, MAPS_config, Endless_mode_config,
                                                          player)
-
     CAV_config.screen_scroll = player.get_screen_scroll()
 
     pygame.display.update()
+    return player, portal, MAPS_config.MAP_MATRIX, MAPS_config.MAP_SEGMENTS_NUMS
 
 
 def restart_menu_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config,
@@ -265,7 +262,7 @@ def restart_menu_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config
                 MUSIC_config.button_click_sound.play()
                 MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
                 MUSIC_config.game_over_sound.stop()
-                endless_mode(SCREEN, clock, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config,
+                endless_mode(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config,
                              GROUPS_config)
 
     pygame.display.update()
@@ -277,7 +274,7 @@ def after_round_actions(CAV_config, MUSIC_config):
     CAV_config.data[len(CAV_config.data) - 1] = str(
         max(int(CAV_config.data[len(CAV_config.data) - 1]), (CAV_config.GLOBAL_X + 500) // 50))
     update_level(
-        {"time": f"00:00:00", "level": 0, "stars": CAV_config.data[len(CAV_config.data) - 1], "difficulty": 4})
+        {"time": "00:00:00", "level": 0, "stars": CAV_config.data[len(CAV_config.data) - 1], "difficulty": 0})
 
 
 def endless_mode(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
@@ -295,8 +292,11 @@ def endless_mode(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
         returned_list = game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                                              MAPS_config, GROUPS_config,
                                              player, portal, Endless_mode_config)
-        if returned_list is not None:
+        if returned_list is not None and len(returned_list) > 4:
             return returned_list
+        elif len(returned_list) == 4:
+            player, portal, MAPS_config.MAP_MATRIX, MAPS_config.MAP_SEGMENTS_NUMS = returned_list[0], returned_list[1], \
+                returned_list[2], returned_list[3]
 
     after_round_actions(CAV_config, MUSIC_config)
     while True:

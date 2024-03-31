@@ -234,5 +234,4 @@ def keybinding(action, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, 
 
         pygame.display.update()
 
-    update_settings(CAV_config.keybinds)
     return SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config

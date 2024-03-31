@@ -25,6 +25,7 @@ def get_settings(data):
 
 def get_data(data):
     res = ["\n" for _ in range(208)]
+    res[207] = "0"
     for i in range(40):
         if i % 10 == 9:
             continue
@@ -40,8 +41,8 @@ def get_data(data):
     if levels is None:
         return None
     for level in levels:
-        if level["difficulty"] == 4:
-            res[207] = level["stars"]
+        if level["level"] == 0:
+            res[207] = str(level["stars"])
             continue
         res[level["difficulty"] * 10 + level["level"] - 1] = str(level["stars"]) + '\n'
         time = level["time"].split(":")

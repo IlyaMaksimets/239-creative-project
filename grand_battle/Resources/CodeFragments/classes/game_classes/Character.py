@@ -1,7 +1,7 @@
 import pygame
 
-from .Bullet import Bullet
 from grand_battle.Resources.CodeFragments.classes.other import CharacterConfig
+from .Bullet import Bullet
 
 Character_config = CharacterConfig()
 
@@ -50,10 +50,10 @@ class Character(pygame.sprite.Sprite):
         Character_config.SCREEN.blit(pygame.transform.flip(self.image, self.change_direction, False), self.rect)
         if self.look_direction == 1:
             Character_config.SCREEN.blit(pygame.transform.flip(self.flying_gun, self.change_direction, False),
-                        (self.rect.x + self.width * self.look_direction, self.rect.y))
+                                         (self.rect.x + self.width * self.look_direction, self.rect.y))
         else:
             Character_config.SCREEN.blit(pygame.transform.flip(self.flying_gun, self.change_direction, False),
-                        (self.rect.x - self.flying_gun.get_width(), self.rect.y))
+                                         (self.rect.x - self.flying_gun.get_width(), self.rect.y))
 
     def get_x(self):
         return self.rect.x
