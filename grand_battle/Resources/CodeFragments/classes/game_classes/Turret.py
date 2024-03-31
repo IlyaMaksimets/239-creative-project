@@ -7,7 +7,7 @@ Turret_config = TurretConfig()
 
 
 class Turret(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, health, bullet_speed, MAP_MATRIX, CHOSEN_DIFFICULTY):
+    def __init__(self, pos_x, pos_y, health, bullet_speed, MAP_MATRIX, CHOSEN_DIFFICULTY, CAV_config):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('Textures/turret.png')
         self.rect = self.image.get_rect()
@@ -22,6 +22,7 @@ class Turret(pygame.sprite.Sprite):
         self.CHOSEN_DIFFICULTY = CHOSEN_DIFFICULTY
         self.bullet_speed = bullet_speed
         self.MAP_MATRIX = MAP_MATRIX
+        self.CAV_config = CAV_config
 
     def shoot(self):
         if self.look_direction == 1:
@@ -48,7 +49,7 @@ class Turret(pygame.sprite.Sprite):
         if self.health < 1:
             destruction_sound = pygame.mixer.Sound("Sounds/destruction_sound.mp3")
             destruction_sound.play()
-            destruction_sound.set_volume(Turret_config.SOUNDS_VOLUME / 100)
+            destruction_sound.set_volume(self.CAV_config.SOUNDS_VOLUME / 100)
             Turret_config.TURRETS_DESTROYED += 1
             self.kill()
             return [self.rect.x, self.rect.y]

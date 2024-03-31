@@ -4,11 +4,9 @@ import pygame
 
 from grand_battle.Resources.CodeFragments.classes import Button
 from grand_battle.Resources.CodeFragments.menu_functions.other_menu.difficulty_list import difficulty_list
-from grand_battle.Resources.CodeFragments.database_functions import get_data
 
 
 def play(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
-    CAV_config.data = get_data({})
     while True:
         chosen_diff = 0
         if CAV_config.CHOSEN_DIFFICULTY == 'beginner':

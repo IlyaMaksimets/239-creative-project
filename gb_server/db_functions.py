@@ -69,7 +69,7 @@ def add_completion(data):
 
 def change_settings(data):
     db.session.execute(
-        db.update(Settings).where(Settings.user_id == data["user_id"]).values(song_volume=data["song_volume"],
+        db.update(Settings).where(Settings.user_id == get_user_id_by_token(data["token"])).values(song_volume=data["song_volume"],
                                                                               sounds_volume=data["sounds_volume"],
                                                                               move_left=data["move_left"],
                                                                               move_right=data["move_right"],

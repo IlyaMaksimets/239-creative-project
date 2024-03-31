@@ -8,7 +8,7 @@ from grand_battle.Resources.CodeFragments.database_functions import keyconvertin
 from grand_battle.Resources.CodeFragments.other_functions import get_font
 
 
-def login_menu(SCREEN):
+def login_menu(SCREEN, CAV_config):
     login_input_box = pygame.Rect(300, 100, 140, 32)
     password_input_box = pygame.Rect(300, 150, 140, 32)
     font = pygame.font.Font(None, 32)
@@ -83,7 +83,7 @@ def login_menu(SCREEN):
 def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config):
     token = open("token.txt", 'r').readlines()
     if not len(token):
-        login_menu(SCREEN)
+        login_menu(SCREEN, CAV_config)
     if CAV_config.first_launch:
         CAV_config.data, CAV_config.keybinds = get_data_and_keys({})
         CAV_config.keyactions = keyconverting(CAV_config.keybinds, CAV_config.keyactions)

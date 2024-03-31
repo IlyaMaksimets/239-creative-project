@@ -69,16 +69,21 @@ def initialize_and_draw_pause_menu(SCREEN, CAV_config, after_death=False):
     if after_death:
         return Button(data=CAV_config.data, image=pygame.image.load("Textures/restart_button_disabled.png"),
                       image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
-            image=pygame.image.load("Textures/exit_button_disabled.png"),
-            image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
+                                                                                                 image=pygame.image.load(
+                                                                                                     "Textures/exit_button_disabled.png"),
+                                                                                                 image_path="Textures/exit_button_disabled.png",
+                                                                                                 pos=(1330, 700))
 
     pause_text = get_font(70).render("Game paused", True, "#b68f40")
     pause_rect = pause_text.get_rect(center=(960, 300))
     SCREEN.blit(pause_text, pause_rect)
     return Button(data=CAV_config.data, image=pygame.image.load("Textures/continue_button_disabled.png"),
                   image_path="Textures/continue_button_disabled.png", pos=(650, 700)), Button(data=CAV_config.data,
-        image=pygame.image.load("Textures/restart_button_disabled.png"),
-        image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
+                                                                                              image=pygame.image.load(
+                                                                                                  "Textures/restart_button_disabled.png"),
+                                                                                              image_path="Textures/restart_button_disabled.png",
+                                                                                              pos=(990, 700)), Button(
+        data=CAV_config.data,
         image=pygame.image.load("Textures/exit_button_disabled.png"),
         image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
 
@@ -94,13 +99,14 @@ def get_drop_chance(difficulty):
         return 0
 
 
-def add_turrets(GROUPS_config, MAPS_config, Level_launch_config):
+def add_turrets(GROUPS_config, MAPS_config, Level_launch_config, CAV_config):
     for i in range(18):
         for j in range(120):
             if MAPS_config.MAP_MATRIX[i][j] == 'T':
                 GROUPS_config.turret_group.add(
                     Turret(j * 50 + 290, i * 50 + 50, Level_launch_config.TURRET_HEALTH,
-                           Level_launch_config.BULLET_SPEED, MAPS_config.MAP_MATRIX, Level_launch_config.c_d))
+                           Level_launch_config.BULLET_SPEED, MAPS_config.MAP_MATRIX, Level_launch_config.c_d,
+                           CAV_config))
     return GROUPS_config
 
 
@@ -165,7 +171,8 @@ def handle_event_type_and_key(CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
                 while paused:
                     play_mouse_pos = pygame.mouse.get_pos()
 
-                    continue_button, retry_button, return_to_level_menu = initialize_and_draw_pause_menu(SCREEN, CAV_config)
+                    continue_button, retry_button, return_to_level_menu = initialize_and_draw_pause_menu(SCREEN,
+                                                                                                         CAV_config)
                     continue_button.changeCondition(play_mouse_pos)
                     continue_button.update(SCREEN)
                     retry_button.changeCondition(play_mouse_pos)
@@ -364,7 +371,7 @@ def level_launch(level_num, clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMA
     portal = Portal(6150, Level_launch_config.portal_y, CAV_config.CHOSEN_DIFFICULTY)
     clock1 = pygame.time.get_ticks()
 
-    GROUPS_config = add_turrets(GROUPS_config, MAPS_config, Level_launch_config)
+    GROUPS_config = add_turrets(GROUPS_config, MAPS_config, Level_launch_config, CAV_config)
 
     while Level_launch_config.playing:
         returned_list = game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,

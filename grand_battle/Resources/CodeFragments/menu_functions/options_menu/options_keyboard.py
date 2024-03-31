@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from grand_battle.Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.database_functions import update_settings
 from grand_battle.Resources.CodeFragments.menu_functions import keybinding
 from grand_battle.Resources.CodeFragments.other_functions import get_font
 
@@ -14,7 +15,8 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
         SCREEN.fill("#121212")
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(0, 0, 240, 1080))
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(1680, 0, 240, 1080))
-        return_to_main_menu_O = Button(data=CAV_config.data, image=pygame.image.load("Textures/return_button_disabled.png"),
+        return_to_main_menu_O = Button(data=CAV_config.data,
+                                       image=pygame.image.load("Textures/return_button_disabled.png"),
                                        image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_main_menu_O.changeCondition(options_mouse_pos)
@@ -59,13 +61,9 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
         pause_key_rect = pause_key.get_rect(center=(1050, 650))
         SCREEN.blit(pause_key, pause_key_rect)
 
-        shoot_key = get_font(50).render("Shoot: " + CAV_config.keybinds["shoot"], True, "#b68f40")
-        shoot_key_rect = shoot_key.get_rect(center=(1050, 750))
-        SCREEN.blit(shoot_key, shoot_key_rect)
-
         change_key_buttons = []
 
-        for i in range(7):
+        for i in range(6):
             change_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/change_button_disabled.png"),
                                    image_path="Textures/change_button_disabled.png", pos=(1550, i * 100 + 150))
             change_button.changeCondition(options_mouse_pos)
@@ -77,7 +75,7 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for i in range(7):
+                for i in range(6):
                     if change_key_buttons[i].checkForInput(options_mouse_pos):
                         MUSIC_config.button_click_sound.play()
                         MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
@@ -99,13 +97,18 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
                         if i == 5:
                             keybinding("pause", SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config,
                                        GROUPS_config)
-                        if i == 6:
-                            keybinding("shoot", SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_config,
-                                       GROUPS_config)
 
                 if return_to_main_menu_O.checkForInput(options_mouse_pos):
                     MUSIC_config.button_click_sound.play()
                     MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
+                    update_settings(
+                        {"song_volume": CAV_config.SONG_VOLUME, "sounds_volume": CAV_config.SOUNDS_VOLUME,
+                         "move_left": CAV_config.keybinds["move_left"],
+                         "move_right": CAV_config.keybinds["move_right"],
+                         "move_up": CAV_config.keybinds["move_up"],
+                         "move_down": CAV_config.keybinds["move_down"],
+                         "jump": CAV_config.keybinds["jump"],
+                         "pause": CAV_config.keybinds["pause"]})
                     return ['main_menu', SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                             MAPS_config, GROUPS_config]
 

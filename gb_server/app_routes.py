@@ -61,27 +61,13 @@ def logout_page():
 
 @simple_page.route('/change_settings', methods=['POST'])
 def change_settings_query():
-    song_volume = request.json["song_volume"]
-    sounds_volume = request.json["sounds_volume"]
-    move_left = request.json["move_left"]
-    move_right = request.json["move_right"]
-    move_up = request.json["move_up"]
-    move_down = request.json["move_down"]
-    jump = request.json["jump"]
-    pause = request.json["pause"]
-    change_settings(
-        {"song_volume": song_volume, "sounds_volume": sounds_volume, "move_left": move_left, "move_right": move_right,
-         "move_up": move_up, "move_down": move_down, "jump": jump, "pause": pause})
+    change_settings(request.json)
+    return {"status": 200}
 
 
 @simple_page.route('/add_completion', methods=['POST'])
 def add_completion_query():
-    user_token = request.json["token"]
-    level = request.json["level"]
-    difficulty = request.json["difficulty"]
-    stars = request.json["stars"]
-    time = request.json["time"]
-    add_completion({"token": user_token, "level": level, "difficulty": difficulty, "stars": stars, "time": time})
+    add_completion(request.json)
     return {"status": 200}
 
 

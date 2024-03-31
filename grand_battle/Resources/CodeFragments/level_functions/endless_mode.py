@@ -14,7 +14,8 @@ def add_turrets(GROUPS_config, MAPS_config, CAV_config):
         for j in range(86):
             if MAPS_config.MAP_MATRIX[i][j] == '1':
                 GROUPS_config.turret_group.add(
-                    Turret(j * 50 + 290 + CAV_config.screen_scroll, i * 50 + 50, 3, 4, MAPS_config.MAP_MATRIX, 2))
+                    Turret(j * 50 + 290 + CAV_config.screen_scroll, i * 50 + 50, 3, 4, MAPS_config.MAP_MATRIX, 2,
+                           CAV_config))
     return GROUPS_config
 
 
@@ -25,23 +26,28 @@ def clear_groups(GROUPS_config):
     GROUPS_config.drop_crate_group.empty()
 
 
-def initialize_pause_menu(SCREEN):
+def initialize_pause_menu(SCREEN, CAV_config):
     pause_text = get_font(70).render("Game paused", True, "#b68f40")
     pause_rect = pause_text.get_rect(center=(960, 300))
     SCREEN.blit(pause_text, pause_rect)
     return Button(data=CAV_config.data, image=pygame.image.load("Textures/continue_button_disabled.png"),
                   image_path="Textures/continue_button_disabled.png", pos=(650, 700)), Button(data=CAV_config.data,
-        image=pygame.image.load("Textures/restart_button_disabled.png"),
-        image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
+                                                                                              image=pygame.image.load(
+                                                                                                  "Textures/restart_button_disabled.png"),
+                                                                                              image_path="Textures/restart_button_disabled.png",
+                                                                                              pos=(990, 700)), Button(
+        data=CAV_config.data,
         image=pygame.image.load("Textures/exit_button_disabled.png"),
         image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
 
 
-def initialize_restart_menu():
+def initialize_restart_menu(CAV_config):
     return Button(data=CAV_config.data, image=pygame.image.load("Textures/restart_button_disabled.png"),
                   image_path="Textures/restart_button_disabled.png", pos=(990, 700)), Button(data=CAV_config.data,
-        image=pygame.image.load("Textures/exit_button_disabled.png"),
-        image_path="Textures/exit_button_disabled.png", pos=(1330, 700))
+                                                                                             image=pygame.image.load(
+                                                                                                 "Textures/exit_button_disabled.png"),
+                                                                                             image_path="Textures/exit_button_disabled.png",
+                                                                                             pos=(1330, 700))
 
 
 def update_and_draw_game_objects(GROUPS_config, CAV_config, player, portal, change, SCREEN):
@@ -99,13 +105,13 @@ def spawn_turrets_player_and_portal(CAV_config, GROUPS_config, MAPS_config, Endl
                     MAPS_config.MAP_MATRIX[i][j] == '2' and CAV_config.TURRETS_DESTROYED_percentage >= 50) or (
                     MAPS_config.MAP_MATRIX[i][j] == '3' and CAV_config.TURRETS_DESTROYED_percentage >= 75):
                 GROUPS_config.turret_group.add(
-                    Turret(j * 50 + 290, i * 50 + 50, 3, 4, MAPS_config.MAP_MATRIX, 2))
+                    Turret(j * 50 + 290, i * 50 + 50, 3, 4, MAPS_config.MAP_MATRIX, 2, CAV_config))
                 Endless_mode_config.turrets_spawned += 1
     player_lives = player.get_lives()
     player = Character(700, 770, 5, min(player_lives + 1, 4), MAPS_config.MAP_MATRIX, 0)
     portal = Portal(4495, 770, 'insane')
     portal.draw()
-    return player
+    return player, portal
 
 
 def handle_event_type_and_key(CAV_config, MUSIC_config, IMAGES_config, MAPS_config, GROUPS_config, Endless_mode_config,
@@ -136,7 +142,7 @@ def handle_event_type_and_key(CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
                 while paused:
                     play_mouse_pos = pygame.mouse.get_pos()
 
-                    continue_button, retry_button, return_to_level_menu = initialize_pause_menu(SCREEN)
+                    continue_button, retry_button, return_to_level_menu = initialize_pause_menu(SCREEN, CAV_config)
                     continue_button.changeCondition(play_mouse_pos)
                     continue_button.update(SCREEN)
                     retry_button.changeCondition(play_mouse_pos)
@@ -224,7 +230,8 @@ def game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES
         MAPS_config.MAP_MATRIX, MAPS_config.MAP_SEGMENTS_NUMS = endless_map_update(MAPS_config.MAP_SEGMENTS_NUMS,
                                                                                    MAPS_config.MAP_SEGMENTS)
 
-        player = spawn_turrets_player_and_portal(CAV_config, GROUPS_config, MAPS_config, Endless_mode_config, player)
+        player, portal = spawn_turrets_player_and_portal(CAV_config, GROUPS_config, MAPS_config, Endless_mode_config,
+                                                         player)
 
     CAV_config.screen_scroll = player.get_screen_scroll()
 
@@ -235,7 +242,7 @@ def restart_menu_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config
                                  GROUPS_config):
     play_mouse_pos = pygame.mouse.get_pos()
 
-    retry_button, return_to_level_menu = initialize_restart_menu()
+    retry_button, return_to_level_menu = initialize_restart_menu(CAV_config)
     retry_button.changeCondition(play_mouse_pos)
     retry_button.update(SCREEN)
 
@@ -278,10 +285,10 @@ def endless_mode(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
     Endless_mode_config = EndlessModeConfig()
     CAV_config.TURRETS_DESTROYED, CAV_config.GLOBAL_X, CAV_config.screen_scroll, MAPS_config.MAP_SEGMENTS_NUMS = 0, -500, 0, [
         rd(0, 11), rd(0, 11), rd(0, 11)]
-    player = Character(700, 770, 5, 4, MAPS_config.MAP_MATRIX, CAV_config.screen_scroll)
-    portal = Portal(4495, 770, 'insane')
     MAPS_config.MAP_MATRIX, MAPS_config.MAP_SEGMENTS_NUMS = endless_map_update(MAPS_config.MAP_SEGMENTS_NUMS,
                                                                                MAPS_config.MAP_SEGMENTS)
+    player = Character(700, 770, 5, 4, MAPS_config.MAP_MATRIX, CAV_config.screen_scroll)
+    portal = Portal(4495, 770, 'insane')
     GROUPS_config = add_turrets(GROUPS_config, MAPS_config, CAV_config)
 
     while Endless_mode_config.playing:

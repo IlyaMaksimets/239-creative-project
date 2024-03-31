@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from grand_battle.Resources.CodeFragments.classes import Button
+from grand_battle.Resources.CodeFragments.database_functions import update_settings
 from grand_battle.Resources.CodeFragments.other_functions import get_font
 
 
@@ -47,6 +48,14 @@ def options_video(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
                 if return_to_main_menu_O.checkForInput(options_mouse_pos):
                     MUSIC_config.button_click_sound.play()
                     MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
+                    update_settings(
+                        {"song_volume": CAV_config.SONG_VOLUME, "sounds_volume": CAV_config.SOUNDS_VOLUME,
+                         "move_left": CAV_config.keybinds["move_left"],
+                         "move_right": CAV_config.keybinds["move_right"],
+                         "move_up": CAV_config.keybinds["move_up"],
+                         "move_down": CAV_config.keybinds["move_down"],
+                         "jump": CAV_config.keybinds["jump"],
+                         "pause": CAV_config.keybinds["pause"]})
                     return ['main_menu', SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                             MAPS_config, GROUPS_config]
 
