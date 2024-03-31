@@ -14,7 +14,7 @@ def update_settings(data):
 
 
 def login(data):
-    response = requests.post(url('/login'), json=data).json()
+    response = requests.post(url('/login'), json={**data, 'game_login': True}).json()
     if response["status"] == 200:
         token = open('token.txt', 'w')
         token.write(response["token"])

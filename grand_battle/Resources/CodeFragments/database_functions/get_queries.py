@@ -69,6 +69,8 @@ def get_data_and_keys(data):
     res = get_data(data)
     keybinds = dict()
     for key in settings.keys():
+        if key == 'bg_enabled':
+            continue
         keybinds[key] = settings[key]
     keybinds['shoot'] = "LMB"
-    return [res, keybinds]
+    return [res, keybinds, settings['bg_enabled']]

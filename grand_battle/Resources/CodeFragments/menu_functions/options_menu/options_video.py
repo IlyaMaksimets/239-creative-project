@@ -15,7 +15,8 @@ def options_video(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
         SCREEN.fill("#121212")
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(0, 0, 240, 1080))
         pygame.draw.rect(SCREEN, (0, 0, 0), pygame.Rect(1680, 0, 240, 1080))
-        return_to_main_menu_O = Button(data=CAV_config.data, image=pygame.image.load("Textures/return_button_disabled.png"),
+        return_to_main_menu_O = Button(data=CAV_config.data,
+                                       image=pygame.image.load("Textures/return_button_disabled.png"),
                                        image_path="Textures/return_button_disabled.png", pos=(310, 900))
 
         return_to_main_menu_O.changeCondition(options_mouse_pos)
@@ -36,9 +37,16 @@ def options_video(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
         keyboard_button.changeCondition(options_mouse_pos)
         keyboard_button.update(SCREEN)
 
-        under_construction = get_font(50).render("Under construction.", True, "#b68f40")
+        under_construction = get_font(50).render(
+            "Background: " + CAV_config.bg_enabled * "enabled" + (not CAV_config.bg_enabled) * "disabled", True,
+            "#b68f40")
         under_construction_rect = under_construction.get_rect(center=(1160, 450))
         SCREEN.blit(under_construction, under_construction_rect)
+
+        change_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/change_button_disabled.png"),
+                               image_path="Textures/change_button_disabled.png", pos=(760, 520))
+        change_button.changeCondition(options_mouse_pos)
+        change_button.update(SCREEN)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -55,7 +63,10 @@ def options_video(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
                          "move_up": CAV_config.keybinds["move_up"],
                          "move_down": CAV_config.keybinds["move_down"],
                          "jump": CAV_config.keybinds["jump"],
-                         "pause": CAV_config.keybinds["pause"]})
+                         "pause": CAV_config.keybinds["pause"],
+                         "bg_enabled": CAV_config.bg_enabled
+                         }
+                    )
                     return ['main_menu', SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                             MAPS_config, GROUPS_config]
 
@@ -74,5 +85,10 @@ def options_video(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
                     MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
                     return ['options_keyboard', SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                             MAPS_config, GROUPS_config]
+
+                if change_button.checkForInput(options_mouse_pos):
+                    MUSIC_config.button_click_sound.play()
+                    MUSIC_config.button_click_sound.set_volume(CAV_config.SOUNDS_VOLUME / 100)
+                    CAV_config.bg_enabled = not CAV_config.bg_enabled
 
         pygame.display.update()

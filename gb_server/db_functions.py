@@ -24,7 +24,8 @@ def get_user_id_by_login(username):
 
 
 def check_for_user(data):
-    user_in_db = list(db.session.execute(db.select(User).where(User.login == data["username"])).scalars())
+    user_in_db = list(db.session.execute(
+        db.select(User).where(User.login == data["username"], User.password == data["password"])).scalars())
 
     return len(user_in_db) > 0
 
@@ -77,7 +78,8 @@ def change_settings(data):
             move_up=data["move_up"],
             move_down=data["move_down"],
             jump=data["jump"],
-            pause=data["pause"]))
+            pause=data["pause"],
+            bg_enabled=data["bg_enabled"]))
 
     db.session.commit()
 
@@ -114,7 +116,7 @@ def get_settings(data):
             db.select(Settings).where(Settings.user_id == get_user_id_by_token(data["token"]))).scalars())[0]
     return {"song_volume": res.song_volume, "sounds_volume": res.sounds_volume,
             "move_left": res.move_left, "move_right": res.move_right, "move_up": res.move_up,
-            "move_down": res.move_down, "jump": res.jump, "pause": res.pause}
+            "move_down": res.move_down, "jump": res.jump, "pause": res.pause, "bg_enabled": res.bg_enabled}
 
 
 def get_completions(data):

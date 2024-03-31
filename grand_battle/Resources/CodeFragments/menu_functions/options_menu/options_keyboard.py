@@ -108,7 +108,8 @@ def options_keyboard(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MA
                          "move_up": CAV_config.keybinds["move_up"],
                          "move_down": CAV_config.keybinds["move_down"],
                          "jump": CAV_config.keybinds["jump"],
-                         "pause": CAV_config.keybinds["pause"]})
+                         "pause": CAV_config.keybinds["pause"],
+                         "bg_enabled": CAV_config.bg_enabled})
                     return ['main_menu', SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                             MAPS_config, GROUPS_config]
 

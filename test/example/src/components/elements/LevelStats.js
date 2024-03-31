@@ -1,5 +1,4 @@
 import '../styles/LevelStats.css';
-import {useState} from "react";
 
 export default function LevelStats({info}) {
     if (info.stars !== "-") {

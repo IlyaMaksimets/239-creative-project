@@ -20,3 +20,4 @@ class GlobalConstAndVarConfig:
         self.keybinds = dict()
         self.keyactions = dict()
         self.first_launch = True
+        self.bg_enabled = 1

@@ -93,7 +93,8 @@ def options_audio(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_
                          "move_up": CAV_config.keybinds["move_up"],
                          "move_down": CAV_config.keybinds["move_down"],
                          "jump": CAV_config.keybinds["jump"],
-                         "pause": CAV_config.keybinds["pause"]})
+                         "pause": CAV_config.keybinds["pause"],
+                         "bg_enabled": CAV_config.bg_enabled})
                     return ['main_menu', SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config,
                             MAPS_config, GROUPS_config]
                 if song_on_off_button.checkForInput(options_mouse_pos):

@@ -27,9 +27,11 @@ def login_page():
         session['password'] = password
         create_token(get_user_id_by_login(username))
         return {"status": 200, "token": get_token_by_user_id(get_user_id_by_login(username))}
-
     else:
-        abort(400)
+        if 'game_login' in request.json.keys():
+            return {"status": 400}
+        else:
+            abort(400)
 
 
 @simple_page.route('/register', methods=['POST'])

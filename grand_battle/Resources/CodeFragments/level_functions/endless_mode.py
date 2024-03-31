@@ -203,7 +203,7 @@ def game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES
     clock.tick(CAV_config.FPS)
     level_background(Endless_mode_config.level_num, player.get_screen_scroll(), CANVAS, SCREEN,
                      MAPS_config.MAP_MATRIX,
-                     IMAGES_config.wall_image, IMAGES_config.ladder_image, 4295)
+                     IMAGES_config.wall_image, IMAGES_config.ladder_image, 4295, CAV_config.bg_enabled)
     change, CAV_config.GLOBAL_X = player.move(Endless_mode_config.move_left, Endless_mode_config.move_right,
                                               'endless')
 

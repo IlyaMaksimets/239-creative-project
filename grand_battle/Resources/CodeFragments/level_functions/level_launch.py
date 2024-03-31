@@ -230,7 +230,7 @@ def game_cycle_iteration(clock, SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES
                          player, portal, Level_launch_config, level_num):
     clock.tick(CAV_config.FPS)
     level_background(int(level_num), player.get_screen_scroll(), CANVAS, SCREEN, MAPS_config.MAP_MATRIX,
-                     IMAGES_config.wall_image, IMAGES_config.ladder_image, 5950)
+                     IMAGES_config.wall_image, IMAGES_config.ladder_image, 5950, CAV_config.bg_enabled)
     change = player.move(Level_launch_config.move_left, Level_launch_config.move_right, 'level')
 
     handle_returned_data(GROUPS_config, CAV_config, MAPS_config, change, player)

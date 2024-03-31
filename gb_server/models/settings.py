@@ -12,3 +12,4 @@ class Settings(db.Model):
     move_down: Mapped[str]
     jump: Mapped[str]
     pause: Mapped[str]
+    bg_enabled: Mapped[int]

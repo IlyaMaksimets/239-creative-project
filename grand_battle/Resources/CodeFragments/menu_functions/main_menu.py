@@ -22,10 +22,31 @@ def login_menu(SCREEN, CAV_config):
     password_text = ''
     while True:
         menu_mouse_pos = pygame.mouse.get_pos()
+
+        SCREEN.fill((30, 30, 30))
+        login_txt_surface = font.render(login_text, True, login_box_color)
+        password_txt_surface = font.render(password_text, True, password_box_color)
+        width = max(200, login_txt_surface.get_width() + 10)
+        login_input_box.w = width
+        password_input_box.w = width
+        SCREEN.blit(login_txt_surface, (login_input_box.x + 5, login_input_box.y + 5))
+        pygame.draw.rect(SCREEN, login_box_color, login_input_box, 2)
+        SCREEN.blit(password_txt_surface, (password_input_box.x + 5, password_input_box.y + 5))
+        pygame.draw.rect(SCREEN, password_box_color, password_input_box, 2)
+
+        submit_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/play_button_disabled.png"),
+                               image_path="Textures/play_button_disabled.png", pos=(960, 400))
+
+        submit_button.changeCondition(menu_mouse_pos)
+        submit_button.update(SCREEN)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                if submit_button.checkForInput(menu_mouse_pos):
+                    if login({"username": login_text, "password": password_text}):
+                        return
                 if login_input_box.collidepoint(event.pos):
                     login_box_active = not login_box_active
                 else:
@@ -54,29 +75,6 @@ def login_menu(SCREEN, CAV_config):
                     else:
                         password_text += event.unicode
 
-        SCREEN.fill((30, 30, 30))
-        login_txt_surface = font.render(login_text, True, login_box_color)
-        password_txt_surface = font.render(password_text, True, password_box_color)
-        width = max(200, login_txt_surface.get_width() + 10)
-        login_input_box.w = width
-        password_input_box.w = width
-        SCREEN.blit(login_txt_surface, (login_input_box.x + 5, login_input_box.y + 5))
-        pygame.draw.rect(SCREEN, login_box_color, login_input_box, 2)
-        SCREEN.blit(password_txt_surface, (password_input_box.x + 5, password_input_box.y + 5))
-        pygame.draw.rect(SCREEN, password_box_color, password_input_box, 2)
-
-        submit_button = Button(data=CAV_config.data, image=pygame.image.load("Textures/play_button_disabled.png"),
-                               image_path="Textures/play_button_disabled.png", pos=(960, 400))
-
-        submit_button.changeCondition(menu_mouse_pos)
-        submit_button.update(SCREEN)
-
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if submit_button.checkForInput(menu_mouse_pos):
-                    if login({"username": login_text, "password": password_text}):
-                        return
-
         pygame.display.update()
 
 
@@ -85,7 +83,7 @@ def main_menu(SCREEN, CANVAS, CAV_config, MUSIC_config, IMAGES_config, MAPS_conf
     if not len(token):
         login_menu(SCREEN, CAV_config)
     if CAV_config.first_launch:
-        CAV_config.data, CAV_config.keybinds = get_data_and_keys({})
+        CAV_config.data, CAV_config.keybinds, CAV_config.bg_enabled = get_data_and_keys({})
         CAV_config.keyactions = keyconverting(CAV_config.keybinds, CAV_config.keyactions)
         for i in range(40, 50):
             if CAV_config.data[i][:2] == "on":
