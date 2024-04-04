@@ -1,6 +1,7 @@
 import '../styles/LevelStats.css';
 
 export default function LevelStats({info}) {
+    console.log(info)
     if (info.stars !== "-") {
         return <>
             <p className={"levelInfoPart"}>Level {info.level}</p>

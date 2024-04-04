@@ -1,7 +1,7 @@
 import '../styles/ProfilePage.css';
 import ProfileInfo from "../elements/ProfileInfo";
 import Statistics from "../elements/Statistics";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import url from "../utils";
 
 function add_completion(l, info) {
@@ -11,7 +11,7 @@ function add_completion(l, info) {
         stars: info.stars,
         time: info.time
     }
-    return l
+    return [...l]
 }
 
 const emptyLevelInfo = [];
@@ -28,21 +28,25 @@ for (let i = 0; i < 36; i++) {
 export default function ProfilePage() {
     const [levelsInfo, setLevelsInfo] = useState(() => emptyLevelInfo);
     const [nickname, setNickname] = useState("");
-    fetch(url("/"), {method: "GET", credentials: "include"}).then((response) => {
-        if (response.status !== 200) {
-            window.location.replace("http://localhost:3000/")
-        }
-    });
-    fetch(url("/get_completions"), {
-        method: "POST",
-        body: JSON.stringify({token: "just_believe_me_this_must_work_so"}),
-        headers: {'Content-Type': 'application/json'},
-        credentials: "include"
-    }).then((response) => response.json()).then((data) => {
-        for(let i = 0; i < data.data.length; i++) {
-            setLevelsInfo(l => add_completion(l, data.data[i]));
-        }
-    });
+    useEffect(() => {
+        fetch(url("/"), {method: "GET", credentials: "include"}).then((response) => {
+            if (response.status !== 200) {
+                window.location.replace("http://localhost:3000/")
+            }
+        });
+        fetch(url("/get_completions"), {
+            method: "POST",
+            body: JSON.stringify({token: "just_believe_me_this_must_work_so"}),
+            headers: {'Content-Type': 'application/json'},
+            credentials: "include"
+        }).then((response) => response.json()).then((data) => {
+            for(let i = 0; i < data.data.length; i++) {
+                setLevelsInfo(l => add_completion(l, data.data[i]));
+            }
+        });
+        console.log(levelsInfo)
+    }, [])
+
     return <>
         <ProfileInfo nickname={nickname}/>
         <Statistics levelsInfo={levelsInfo}/>
