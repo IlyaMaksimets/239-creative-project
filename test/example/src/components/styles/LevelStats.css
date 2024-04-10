@@ -1,3 +1,27 @@
-.levelInfoPart{
-    /* Under construction */
+.levelInfoPart0, .emInfoPart{
+    text-align: center;
+    color: #2FBDBD;
+    font-size: 20px;
+    font-family: "Comic Sans MS", serif;
+}
+
+.levelInfoPart1{
+    text-align: center;
+    color: #CC5D00;
+    font-size: 20px;
+    font-family: "Comic Sans MS", serif;
+}
+
+.levelInfoPart2{
+    text-align: center;
+    color: #CC0000;
+    font-size: 20px;
+    font-family: "Comic Sans MS", serif;
+}
+
+.levelInfoPart3{
+    text-align: center;
+    color: #850000;
+    font-size: 20px;
+    font-family: "Comic Sans MS", serif;
 }

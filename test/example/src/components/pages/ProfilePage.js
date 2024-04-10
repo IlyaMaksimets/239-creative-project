@@ -1,22 +1,31 @@
 import '../styles/ProfilePage.css';
-import ProfileInfo from "../elements/ProfileInfo";
 import Statistics from "../elements/Statistics";
 import {useState, useEffect} from "react";
 import url from "../utils";
 
 function add_completion(l, info) {
-    l[info.difficulty * 9 + info.level - 1] = {
-        level: info.level,
-        difficulty: info.difficulty,
-        stars: info.stars,
-        time: info.time
+    if (info.level === 0){
+        l[36] = {
+            level: "endless_mode",
+            stars: "-",
+            difficulty: -1,
+            distance: info.stars
+        }
+    }
+    else {
+        l[info.difficulty * 9 + info.level - 1] = {
+            level: info.level,
+            difficulty: info.difficulty,
+            stars: info.stars,
+            time: info.time
+        }
     }
     return [...l]
 }
 
 const emptyLevelInfo = [];
 
-for (let i = 0; i < 36; i++) {
+for (let i = 0; i < 37; i++) {
     emptyLevelInfo[i] = {
         level: (i + 1) % 9 === 0 ? 9 : (i + 1) % 9,
         difficulty: Math.floor((i) / 9),
@@ -48,7 +57,6 @@ export default function ProfilePage() {
     }, [])
 
     return <>
-        <ProfileInfo nickname={nickname}/>
         <Statistics levelsInfo={levelsInfo}/>
     </>
 }
