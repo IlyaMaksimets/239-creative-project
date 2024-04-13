@@ -16,7 +16,7 @@ export default function LoginForm() {
                 credentials: "include"
             }).then((response) => {
                 if (response.status === 200) {
-                    window.location.replace("/home")
+                    window.location.replace("/cp/home")
                 }
             })}>Submit
             </button>
