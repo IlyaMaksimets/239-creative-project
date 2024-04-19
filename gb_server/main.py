@@ -3,7 +3,7 @@ from flask_cors import CORS
 from app_routes import simple_page
 from models import db
 
-app = Flask(__name__, static_folder="build_cp", static_url_path='')
+app = Flask(__name__, static_folder="cp", static_url_path='')
 app.config['SESSION_COOKIE_HTTPONLY'] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db.init_app(app)

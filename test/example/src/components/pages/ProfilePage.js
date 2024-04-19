@@ -40,7 +40,7 @@ export default function ProfilePage() {
     useEffect(() => {
         fetch(url("/"), {method: "GET", credentials: "include"}).then((response) => {
             if (response.status !== 200) {
-                window.location.replace("/")
+                window.location.replace("/cp/")
             }
         });
         fetch(url("/get_completions"), {
