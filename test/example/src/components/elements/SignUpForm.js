@@ -22,7 +22,7 @@ export default function SignUpForm() {
                 credentials: "include"
             }).then((response) => {
                 if (response.status === 200) {
-                    window.location.replace("/cp/home")
+                    window.location.replace("/home")
                 }
             })}>Submit
             </button>

@@ -5,20 +5,20 @@ import LoginPage from "./components/pages/LoginPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import LogoutPage from "./components/pages/LogoutPage";
 import ProfilePage from "./components/pages/ProfilePage";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {HashRouter, Routes, Route} from "react-router-dom";
 
 function App() {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
-                <Route path="/cp/" element={<MainPage />}/>
-                <Route path="/cp/home" element={<HomePage />}/>
-                <Route path="/cp/login" element={<LoginPage />} />
-                <Route path="/cp/register" element={<SignUpPage />} />
-                <Route path="/cp/home/logout" element={<LogoutPage />} />
-                <Route path="/cp/home/profile" element={<ProfilePage />} />
+                <Route path="/" element={<MainPage />}/>
+                <Route path="/home" element={<HomePage />}/>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<SignUpPage />} />
+                <Route path="/home/logout" element={<LogoutPage />} />
+                <Route path="/home/profile" element={<ProfilePage />} />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 export default App;
