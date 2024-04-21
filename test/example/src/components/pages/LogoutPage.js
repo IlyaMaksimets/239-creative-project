@@ -14,7 +14,7 @@ export default function LoginPage() {
             <h1 className="LogoutTitle">Are you sure you wanna end current session?</h1>
             <div>
                 <button className="logoutButtonYes" onClick={() => {
-                    fetch(url('/logout'), {method: "POST", credentials: "include"}).then(() => window.location.replace("/cp/"))
+                    fetch(url('/logout'), {method: "POST", credentials: "include"}).then(() => window.location.replace("/cp/cp/"))
                 }}>Yes</button>
                 <button className="logoutButtonNo" onClick={() => window.location.replace("/cp/cp/#/home")}>No</button>
             </div>
