@@ -5,7 +5,7 @@ export default function MainPage() {
     const navigate = useNavigate();
     fetch(url("/"), {method: "GET", credentials: "include"}).then((response) => {
         if (response.status === 200){
-            window.location.replace("/cp/home")
+            window.location.replace("/cp/cp/#/home")
         }
     });
     return (

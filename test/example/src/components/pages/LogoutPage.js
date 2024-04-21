@@ -5,7 +5,7 @@ import url from "../utils";
 export default function LoginPage() {
     fetch(url("/"), {method: "GET", credentials: "include"}).then((response) => {
         if (response.status !== 200){
-            window.location.replace("/cp/")
+            window.location.replace("/cp/cp/")
         }
     });
 
@@ -16,7 +16,7 @@ export default function LoginPage() {
                 <button className="logoutButtonYes" onClick={() => {
                     fetch(url('/logout'), {method: "POST", credentials: "include"}).then(() => window.location.replace("/cp/"))
                 }}>Yes</button>
-                <button className="logoutButtonNo" onClick={() => window.location.replace("/cp/home")}>No</button>
+                <button className="logoutButtonNo" onClick={() => window.location.replace("/cp/cp/#/home")}>No</button>
             </div>
         </>
     );

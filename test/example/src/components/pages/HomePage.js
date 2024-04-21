@@ -1,8 +1,14 @@
 import '../styles/MainHomePage.css';
 import {Outlet, useNavigate} from 'react-router-dom';
+import url from "../utils";
 
 export default function HomePage() {
     const navigate = useNavigate();
+    fetch(url("/"), {method: "GET", credentials: "include"}).then((response) => {
+        if (response.status !== 200){
+            window.location.replace("/cp/cp/")
+        }
+    });
     return (
         <body>
         <div>
