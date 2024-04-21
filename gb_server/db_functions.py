@@ -26,7 +26,6 @@ def get_user_id_by_login(username):
 def check_for_user(data):
     user_in_db = list(db.session.execute(
         db.select(User).where(User.login == data["username"], User.password == data["password"])).scalars())
-
     return len(user_in_db) > 0
 
 
@@ -51,7 +50,8 @@ def create_user(data):
                                    move_up='W',
                                    move_down='S',
                                    jump='Space',
-                                   pause='esc'))
+                                   pause='esc',
+                                   bg_enabled=1))
     db.session.commit()
 
 

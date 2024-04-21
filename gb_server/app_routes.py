@@ -39,16 +39,16 @@ def register_page():
     if 'username' in session:
         abort(400)
 
-    login = request.json['username']
+    username = request.json['username']
     password = request.json['password']
     passwordConfirmation = request.json['passwordConfirmation']
 
-    user_exists = check_for_user({"login": login, "password": password})
+    user_exists = check_for_user({"username": username, "password": password})
 
     if not user_exists and password == passwordConfirmation:
-        session['username'] = login
+        session['username'] = username
         session['password'] = password
-        create_user({"login": login, "password": password})
+        create_user({"username": username, "password": password})
         return '-created-'
 
     else:
