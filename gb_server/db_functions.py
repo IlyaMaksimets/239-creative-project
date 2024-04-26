@@ -52,6 +52,9 @@ def create_user(data):
                                    jump='Space',
                                    pause='esc',
                                    bg_enabled=1))
+    db.session.execute(db.insert(Completion).values(id=secrets.token_hex(TOKEN_HALF_LENGTH),
+                                                    user_id=user_id, level=0, difficulty=0,
+                                                    stars=0, time="00:00:00"))
     db.session.commit()
 
 
